@@ -13,15 +13,15 @@ import ApiKeyStatus from '../ApiKeyStatus';
 
 export default function Header() {
   return (
-    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-card px-4 md:px-6 z-50">
-      <div className="flex items-center gap-2">
-        <GraduationCap className="h-6 w-6 text-primary" />
-        <h1 className="text-lg font-semibold md:text-xl font-headline">
+    <header className="sticky top-0 flex h-20 items-center gap-4 border-b bg-card px-4 md:px-6 z-50">
+      <div className="flex items-center gap-4 flex-1 justify-center relative">
+        <GraduationCap className="h-8 w-8 text-primary" />
+        <h1 className="text-2xl font-semibold md:text-3xl font-headline">
           UniGrad Planner
         </h1>
       </div>
-      <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-        <div className="ml-auto flex-1 sm:flex-initial">
+      <div className="flex items-center gap-4 absolute right-4 md:right-6">
+        <div className="hidden sm:flex">
           <ApiKeyStatus />
         </div>
         <DropdownMenu>
