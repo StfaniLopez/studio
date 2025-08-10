@@ -1,0 +1,107 @@
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { user, completedCourses, pendingCourses } from "@/lib/data";
+
+export default function DashboardPage() {
+  const progressValue = (user.creditosCompletados / user.totalCredits) * 100;
+  
+  return (
+    <div className="grid gap-6">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Overall GPA</CardTitle>
+            <span className="text-2xl">🎓</span>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{user.gpa.toFixed(2)}</div>
+            <p className="text-xs text-muted-foreground">Based on all completed courses</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Completed Credits</CardTitle>
+            <span className="text-2xl">📚</span>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{user.creditosCompletados}</div>
+            <p className="text-xs text-muted-foreground">Out of {user.totalCredits} required</p>
+          </CardContent>
+        </Card>
+        <Card className="col-span-1 lg:col-span-2">
+           <CardHeader className="pb-2">
+             <CardTitle className="text-sm font-medium">Career Progress</CardTitle>
+           </CardHeader>
+           <CardContent>
+              <Progress value={progressValue} aria-label={`${progressValue.toFixed(0)}% complete`} />
+             <p className="text-sm text-muted-foreground mt-2">{progressValue.toFixed(2)}% of your degree completed.</p>
+           </CardContent>
+        </Card>
+      </div>
+      <div className="grid gap-6 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>Completed Courses</CardTitle>
+            <CardDescription>Courses you have successfully passed.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Course</TableHead>
+                  <TableHead>Credits</TableHead>
+                  <TableHead className="text-right">Grade</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {completedCourses.map((course) => (
+                  <TableRow key={course.codigo}>
+                    <TableCell>
+                        <div className="font-medium">{course.codigo}</div>
+                        <div className="text-sm text-muted-foreground">{course.nombre}</div>
+                    </TableCell>
+                    <TableCell>{course.creditos}</TableCell>
+                    <TableCell className="text-right">
+                      <Badge variant="default" className="bg-green-500">{course.grade}</Badge>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Pending Courses</CardTitle>
+            <CardDescription>Required courses for your degree.</CardDescription>
+          </CardHeader>
+          <CardContent>
+             <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Course</TableHead>
+                  <TableHead>Credits</TableHead>
+                  <TableHead>Prerequisites</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {pendingCourses.map((course) => (
+                  <TableRow key={course.codigo}>
+                    <TableCell>
+                      <div className="font-medium">{course.codigo}</div>
+                      <div className="text-sm text-muted-foreground">{course.nombre}</div>
+                    </TableCell>
+                    <TableCell>{course.creditos}</TableCell>
+                    <TableCell>{course.prerequisitos.join(', ') || 'None'}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  )
+}
