@@ -84,13 +84,13 @@ export default function OptimalPathGenerator() {
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                <FormField
                 control={form.control}
                 name="completedCourses"
                 render={() => (
                   <FormItem>
-                    <FormLabel>Completed Courses</FormLabel>
+                    <FormLabel className="text-lg">Completed Courses</FormLabel>
                     <div className="space-y-2 pt-2">
                         {completedCourses.map(course => (
                             <div key={course.code} className="flex items-center gap-2">
@@ -108,12 +108,12 @@ export default function OptimalPathGenerator() {
                 render={() => (
                   <FormItem>
                     <div className="mb-4">
-                      <FormLabel>Remaining Requirements</FormLabel>
+                      <FormLabel className="text-lg">Remaining Requirements</FormLabel>
                       <FormDescription>
                         Select the courses you plan to take.
                       </FormDescription>
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-3">
                     {pendingCourses.map((item) => (
                       <FormField
                         key={item.code}
@@ -130,9 +130,9 @@ export default function OptimalPathGenerator() {
                                   checked={field.value?.includes(item.code)}
                                   onCheckedChange={(checked) => {
                                     return checked
-                                      ? field.onChange([...field.value, item.code])
+                                      ? field.onChange([...(field.value || []), item.code])
                                       : field.onChange(
-                                          field.value?.filter(
+                                          (field.value || []).filter(
                                             (value) => value !== item.code
                                           )
                                         )
@@ -157,7 +157,7 @@ export default function OptimalPathGenerator() {
                 name="desiredGraduationTimeline"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Desired Graduation Timeline</FormLabel>
+                    <FormLabel className="text-lg">Desired Graduation Timeline</FormLabel>
                      <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                             <SelectTrigger>
@@ -179,10 +179,13 @@ export default function OptimalPathGenerator() {
                 name="studentProfile"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Student Profile (Optional)</FormLabel>
+                    <FormLabel className="text-lg">Student Profile (Optional)</FormLabel>
                     <FormControl>
                       <Textarea placeholder="Tell us about your interests, strengths, etc." className="resize-none" {...field} />
                     </FormControl>
+                     <FormDescription>
+                        Provide a brief summary of your academic interests, strengths, or career goals to get better elective recommendations.
+                      </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
