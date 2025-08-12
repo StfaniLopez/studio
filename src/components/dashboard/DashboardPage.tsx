@@ -9,37 +9,6 @@ export default function DashboardPage() {
   
   return (
     <div className="grid gap-6">
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Overall GPA</CardTitle>
-            <span className="text-2xl">🎓</span>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{user.gpa.toFixed(2)}</div>
-            <p className="text-xs text-muted-foreground">Based on all completed courses</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Completed Credits</CardTitle>
-            <span className="text-2xl">📚</span>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{user.completedCredits}</div>
-            <p className="text-xs text-muted-foreground">Out of {user.totalCredits} required</p>
-          </CardContent>
-        </Card>
-        <Card className="col-span-1 lg:col-span-2">
-           <CardHeader className="pb-2">
-             <CardTitle className="text-sm font-medium">Degree Progress</CardTitle>
-           </CardHeader>
-           <CardContent>
-              <Progress value={progressValue} aria-label={`${progressValue.toFixed(0)}% complete`} />
-             <p className="text-sm text-muted-foreground mt-2">{progressValue.toFixed(2)}% of your degree completed.</p>
-           </CardContent>
-        </Card>
-      </div>
       <div className="grid gap-6 md:grid-cols-2">
         <Card>
           <CardHeader>
