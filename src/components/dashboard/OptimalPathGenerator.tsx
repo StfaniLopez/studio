@@ -17,7 +17,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { Checkbox } from '../ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { pendingCourses } from '@/lib/data';
+import { pendingCourses, completedCourses } from '@/lib/data';
 import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
@@ -43,7 +43,7 @@ export default function OptimalPathGenerator() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      completedCourses: 'CS101, MATH101, PHYS101',
+      completedCourses: completedCourses.map(c => c.code).join(', '),
       remainingRequirements: ['CS240', 'CS300', 'MATH202'],
       desiredGraduationTimeline: 'Spring 2026',
       studentProfile: 'Student interested in AI and machine learning, with strong programming skills.',
@@ -94,9 +94,9 @@ export default function OptimalPathGenerator() {
                 name="completedCourses"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Completed Courses (comma-separated)</FormLabel>
+                    <FormLabel>Completed Courses</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., CS101, MATH101" {...field} />
+                      <Input placeholder="e.g., CS101, MATH101" {...field} readOnly className="bg-muted" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -133,7 +133,6 @@ export default function OptimalPathGenerator() {
                                                     : [...selected, course.code];
                                                 field.onChange(newValue);
                                             }}
-                                            className="text-black"
                                         >
                                             <Checkbox
                                                 checked={field.value?.includes(course.code)}
