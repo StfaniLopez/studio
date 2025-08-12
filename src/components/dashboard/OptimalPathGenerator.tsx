@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Bot, Loader2, Send, Sparkles } from 'lucide-react';
+import { Bot, ChevronDown, Loader2, Send, Sparkles } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -13,13 +13,26 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { generatePathAction } from '@/lib/actions';
 import type { GenerateOptimalGraduationPathsOutput } from '@/ai/flows/generate-optimal-graduation-paths';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
+import { Checkbox } from '../ui/checkbox';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { pendingCourses } from '@/lib/data';
 
 const formSchema = z.object({
   completedCourses: z.string().min(1, 'Please list completed courses.'),
-  remainingRequirements: z.string().min(1, 'Please list remaining requirements.'),
+  remainingRequirements: z.array(z.string()).min(1, 'Please select at least one course.'),
   desiredGraduationTimeline: z.string().min(1, 'Please provide a desired timeline.'),
   studentProfile: z.string().optional(),
 });
+
+const timelineOptions = [
+    "Fall 2025",
+    "Spring 2026",
+    "Fall 2026",
+    "Spring 2027",
+    "Fall 2027"
+];
 
 export default function OptimalPathGenerator() {
   const [loading, setLoading] = useState(false);
@@ -30,7 +43,7 @@ export default function OptimalPathGenerator() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       completedCourses: 'CS101, MATH101, PHYS101',
-      remainingRequirements: 'CS202, CS301, MATH202, ELECTIVE, ELECTIVE',
+      remainingRequirements: ['CS240', 'CS300', 'MATH202'],
       desiredGraduationTimeline: 'Spring 2026',
       studentProfile: 'Student interested in AI and machine learning, with strong programming skills.',
     },
@@ -42,7 +55,7 @@ export default function OptimalPathGenerator() {
     try {
       const response = await generatePathAction({
         completedCourses: values.completedCourses.split(',').map(s => s.trim()),
-        remainingRequirements: values.remainingRequirements.split(',').map(s => s.trim()),
+        remainingRequirements: values.remainingRequirements,
         desiredGraduationTimeline: values.desiredGraduationTimeline,
         studentProfile: values.studentProfile,
       });
@@ -92,11 +105,46 @@ export default function OptimalPathGenerator() {
                 control={form.control}
                 name="remainingRequirements"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Remaining Requirements (comma-separated)</FormLabel>
-                    <FormControl>
-                      <Input placeholder="e.g., CS301, ELECTIVE" {...field} />
-                    </FormControl>
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Remaining Requirements</FormLabel>
+                     <Popover>
+                        <PopoverTrigger asChild>
+                            <FormControl>
+                                <Button variant="outline" role="combobox" className={cn("w-full justify-between", !field.value?.length && "text-muted-foreground")}>
+                                    {field.value?.length ? `${field.value.length} selected` : "Select courses"}
+                                    <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                </Button>
+                            </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
+                           <Command>
+                            <CommandInput placeholder="Search courses..." />
+                            <CommandList>
+                               <CommandEmpty>No course found.</CommandEmpty>
+                               <CommandGroup>
+                                    {pendingCourses.map((course) => (
+                                        <CommandItem
+                                            key={course.code}
+                                            onSelect={() => {
+                                                const selected = field.value || [];
+                                                const newValue = selected.includes(course.code)
+                                                    ? selected.filter((c) => c !== course.code)
+                                                    : [...selected, course.code];
+                                                field.onChange(newValue);
+                                            }}
+                                        >
+                                            <Checkbox
+                                                checked={field.value?.includes(course.code)}
+                                                className="mr-2"
+                                            />
+                                            {course.name} ({course.code})
+                                        </CommandItem>
+                                    ))}
+                               </CommandGroup>
+                            </CommandList>
+                           </Command>
+                        </PopoverContent>
+                    </Popover>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -107,9 +155,18 @@ export default function OptimalPathGenerator() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Desired Graduation Timeline</FormLabel>
-                    <FormControl>
-                      <Input placeholder="e.g., Spring 2026" {...field} />
-                    </FormControl>
+                     <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select a semester" />
+                            </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                            {timelineOptions.map(option => (
+                                <SelectItem key={option} value={option}>{option}</SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -129,6 +186,8 @@ export default function OptimalPathGenerator() {
               />
               <Button type="submit" disabled={loading} className="w-full">
                 {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />}
+                Generate Path
+              </a-4 w-4" />}
                 Generate Path
               </Button>
             </form>
