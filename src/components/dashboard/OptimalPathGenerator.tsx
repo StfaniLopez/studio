@@ -133,6 +133,7 @@ export default function OptimalPathGenerator() {
                                                     : [...selected, course.code];
                                                 field.onChange(newValue);
                                             }}
+                                            className="text-black"
                                         >
                                             <Checkbox
                                                 checked={field.value?.includes(course.code)}
