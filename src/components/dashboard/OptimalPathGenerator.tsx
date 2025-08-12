@@ -16,7 +16,6 @@ import { Checkbox } from '../ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { pendingCourses, completedCourses } from '@/lib/data';
 import { Separator } from '../ui/separator';
-import { MultiSelect } from '../ui/multi-select';
 
 const formSchema = z.object({
   completedCourses: z.string().min(1, 'Please list completed courses.'),
@@ -32,12 +31,6 @@ const timelineOptions = [
     "Spring 2027",
     "Fall 2027"
 ];
-
-const courseOptions = pendingCourses.map(course => ({
-  value: course.code,
-  label: `${course.name} (${course.code})`
-}));
-
 
 export default function OptimalPathGenerator() {
   const [loading, setLoading] = useState(false);
@@ -116,18 +109,47 @@ export default function OptimalPathGenerator() {
                 name="remainingRequirements"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg">Remaining Requirements</FormLabel>
-                     <FormControl>
-                        <MultiSelect
-                            options={courseOptions}
-                            selected={field.value}
-                            onChange={field.onChange}
-                            placeholder="Select courses..."
-                        />
-                    </FormControl>
-                    <FormDescription>
+                    <div className="mb-4">
+                      <FormLabel className="text-lg">Remaining Requirements</FormLabel>
+                      <FormDescription>
                         Select the courses you plan to take.
-                    </FormDescription>
+                      </FormDescription>
+                    </div>
+                    <div className="space-y-3">
+                      {pendingCourses.map((course) => (
+                        <FormField
+                          key={course.code}
+                          control={form.control}
+                          name="remainingRequirements"
+                          render={({ field }) => {
+                            return (
+                              <FormItem
+                                key={course.code}
+                                className="flex flex-row items-start space-x-3 space-y-0"
+                              >
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(course.code)}
+                                    onCheckedChange={(checked) => {
+                                      return checked
+                                        ? field.onChange([...field.value, course.code])
+                                        : field.onChange(
+                                            field.value?.filter(
+                                              (value) => value !== course.code
+                                            )
+                                          );
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal">
+                                  {course.name} ({course.code})
+                                </FormLabel>
+                              </FormItem>
+                            );
+                          }}
+                        />
+                      ))}
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
