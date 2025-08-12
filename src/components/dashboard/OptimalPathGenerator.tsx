@@ -4,12 +4,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Bot, ChevronDown, Loader2, Send, Sparkles } from 'lucide-react';
+import { Bot, ChevronDown, Loader2, Send, Sparkles, CheckCircle } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Textarea } from '@/components/ui/textarea';
-import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { generatePathAction } from '@/lib/actions';
 import type { GenerateOptimalGraduationPathsOutput } from '@/ai/flows/generate-optimal-graduation-paths';
@@ -89,15 +88,20 @@ export default function OptimalPathGenerator() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
+               <FormField
                 control={form.control}
                 name="completedCourses"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Completed Courses</FormLabel>
                     <FormControl>
-                       <div className="p-3 rounded-md bg-muted/50 text-sm text-muted-foreground">
-                        {completedCourses.map(course => course.name).join(', ')}
+                       <div className="space-y-2 rounded-md border border-muted/50 p-3">
+                        {completedCourses.map(course => (
+                            <div key={course.code} className="flex items-center gap-2">
+                                <CheckCircle className="h-4 w-4 text-green-500" />
+                                <span className="text-sm text-muted-foreground">{course.name}</span>
+                            </div>
+                        ))}
                       </div>
                     </FormControl>
                     <FormMessage />
