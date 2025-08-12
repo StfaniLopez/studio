@@ -2,13 +2,30 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Progress } from "@/components/ui/progress";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { user, completedCourses, pendingCourses } from "@/lib/data";
 
 export default function DashboardPage() {
-  const progressValue = (user.creditosCompletados / user.totalCredits) * 100;
+  const progressValue = (user.completedCredits / user.totalCredits) * 100;
   
   return (
     <div className="grid gap-6">
+      <Card>
+        <CardHeader className="flex flex-row items-center gap-4">
+          <Avatar className="h-20 w-20">
+            <AvatarImage src="https://placehold.co/80x80.png" alt={user.name} data-ai-hint="student avatar" />
+            <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+          </Avatar>
+          <div>
+            <CardTitle className="text-2xl">{user.name}</CardTitle>
+            <CardDescription className="text-base">{user.email}</CardDescription>
+            <div className="mt-2 flex items-center gap-4">
+              <Badge variant="outline">Major: {user.major}</Badge>
+              <Badge variant="outline">Term: {user.currentTerm}</Badge>
+            </div>
+          </div>
+        </CardHeader>
+      </Card>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -26,13 +43,13 @@ export default function DashboardPage() {
             <span className="text-2xl">📚</span>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{user.creditosCompletados}</div>
+            <div className="text-2xl font-bold">{user.completedCredits}</div>
             <p className="text-xs text-muted-foreground">Out of {user.totalCredits} required</p>
           </CardContent>
         </Card>
         <Card className="col-span-1 lg:col-span-2">
            <CardHeader className="pb-2">
-             <CardTitle className="text-sm font-medium">Career Progress</CardTitle>
+             <CardTitle className="text-sm font-medium">Degree Progress</CardTitle>
            </CardHeader>
            <CardContent>
               <Progress value={progressValue} aria-label={`${progressValue.toFixed(0)}% complete`} />
@@ -57,12 +74,12 @@ export default function DashboardPage() {
               </TableHeader>
               <TableBody>
                 {completedCourses.map((course) => (
-                  <TableRow key={course.codigo}>
+                  <TableRow key={course.code}>
                     <TableCell>
-                        <div className="font-medium">{course.codigo}</div>
-                        <div className="text-sm text-muted-foreground">{course.nombre}</div>
+                        <div className="font-medium">{course.code}</div>
+                        <div className="text-sm text-muted-foreground">{course.name}</div>
                     </TableCell>
-                    <TableCell>{course.creditos}</TableCell>
+                    <TableCell>{course.credits}</TableCell>
                     <TableCell className="text-right">
                       <Badge variant="default" className="bg-green-500">{course.grade}</Badge>
                     </TableCell>
@@ -88,13 +105,13 @@ export default function DashboardPage() {
               </TableHeader>
               <TableBody>
                 {pendingCourses.map((course) => (
-                  <TableRow key={course.codigo}>
+                  <TableRow key={course.code}>
                     <TableCell>
-                      <div className="font-medium">{course.codigo}</div>
-                      <div className="text-sm text-muted-foreground">{course.nombre}</div>
+                      <div className="font-medium">{course.code}</div>
+                      <div className="text-sm text-muted-foreground">{course.name}</div>
                     </TableCell>
-                    <TableCell>{course.creditos}</TableCell>
-                    <TableCell>{course.prerequisitos.join(', ') || 'None'}</TableCell>
+                    <TableCell>{course.credits}</TableCell>
+                    <TableCell>{course.prerequisites.join(', ') || 'None'}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

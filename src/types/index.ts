@@ -1,18 +1,19 @@
 export interface User {
   id: string;
   email: string;
-  nombre: string;
-  carrera: string;
-  creditosCompletados: number;
+  name: string;
+  major: string;
+  completedCredits: number;
   totalCredits: number;
   gpa: number;
+  currentTerm: string;
 }
 
 export interface Course {
-  codigo: string;
-  nombre: string;
-  creditos: number;
-  prerequisitos: string[];
+  code: string;
+  name: string;
+  credits: number;
+  prerequisites: string[];
 }
 
 export interface CompletedCourse extends Course {
@@ -21,5 +22,5 @@ export interface CompletedCourse extends Course {
 
 export interface Progress {
   userId: string;
-  cursosCompletados: { [courseId: string]: string }; // courseId: grade
+  completedCourses: { [courseId: string]: string }; // courseId: grade
 }

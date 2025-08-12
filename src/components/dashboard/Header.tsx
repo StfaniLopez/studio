@@ -10,8 +10,11 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import ApiKeyStatus from '../ApiKeyStatus';
+import { user } from '@/lib/data';
 
 export default function Header() {
+  const userInitials = user.name.split(' ').map(n => n[0]).join('');
+
   return (
     <header className="sticky top-0 flex h-20 items-center gap-4 border-b bg-card px-4 md:px-6 z-50">
       <div className="flex items-center gap-4 flex-1 justify-center relative">
@@ -28,14 +31,14 @@ export default function Header() {
           <DropdownMenuTrigger asChild>
             <Button variant="secondary" size="icon" className="rounded-full">
               <Avatar>
-                <AvatarImage src="https://placehold.co/40x40.png" alt="User" data-ai-hint="student avatar" />
-                <AvatarFallback>U</AvatarFallback>
+                <AvatarImage src="https://placehold.co/40x40.png" alt={user.name} data-ai-hint="student avatar" />
+                <AvatarFallback>{userInitials}</AvatarFallback>
               </Avatar>
               <span className="sr-only">Toggle user menu</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Alex Doe</DropdownMenuLabel>
+            <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <User className="mr-2 h-4 w-4" />

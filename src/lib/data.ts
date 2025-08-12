@@ -3,24 +3,25 @@ import type { User, Course, CompletedCourse } from "@/types";
 export const user: User = {
   id: '1',
   email: 'alex.doe@university.edu',
-  nombre: 'Alex Doe',
-  carrera: 'Computer Science',
-  creditosCompletados: 45,
+  name: 'Alex Doe',
+  major: 'Computer Science',
+  completedCredits: 45,
   totalCredits: 120,
-  gpa: 3.8
+  gpa: 3.8,
+  currentTerm: 'Fall 2024'
 };
 
 export const completedCourses: CompletedCourse[] = [
-  { codigo: 'CS101', nombre: 'Intro to Programming', creditos: 3, grade: 'A' },
-  { codigo: 'MATH201', nombre: 'Calculus I', creditos: 4, grade: 'A-' },
-  { codigo: 'ENGL101', nombre: 'Composition', creditos: 3, grade: 'B+' },
-  { codigo: 'HIST110', nombre: 'World History', creditos: 3, grade: 'A' },
+  { code: 'CS101', name: 'Intro to Programming', credits: 3, grade: 'A', prerequisites: [] },
+  { code: 'MATH201', name: 'Calculus I', credits: 4, grade: 'A-', prerequisites: [] },
+  { code: 'ENGL101', name: 'Composition', credits: 3, grade: 'B+', prerequisites: [] },
+  { code: 'HIST110', name: 'World History', credits: 3, grade: 'A', prerequisites: [] },
 ];
 
 export const pendingCourses: Course[] = [
-  { codigo: 'CS240', nombre: 'Data Structures', creditos: 3, prerequisitos: ['CS101'] },
-  { codigo: 'CS300', nombre: 'Algorithms', creditos: 3, prerequisitos: ['CS240'] },
-  { codigo: 'MATH202', nombre: 'Calculus II', creditos: 4, prerequisitos: ['MATH201'] },
-  { codigo: 'PHYS211', nombre: 'University Physics I', creditos: 4, prerequisitos: ['MATH201'] },
-  { codigo: 'HUMA-ELEC', nombre: 'Humanities Elective', creditos: 3, prerequisitos: [] },
+  { code: 'CS240', name: 'Data Structures', credits: 3, prerequisites: ['CS101'] },
+  { code: 'CS300', name: 'Algorithms', credits: 3, prerequisites: ['CS240'] },
+  { code: 'MATH202', name: 'Calculus II', credits: 4, prerequisites: ['MATH201'] },
+  { code: 'PHYS211', name: 'University Physics I', credits: 4, prerequisites: ['MATH201'] },
+  { code: 'HUMA-ELEC', name: 'Humanities Elective', credits: 3, prerequisites: [] },
 ];
