@@ -28,8 +28,8 @@ export default function DashboardPage() {
                 {completedCourses.map((course) => (
                   <TableRow key={course.code}>
                     <TableCell>
-                        <div className="font-medium">{course.code}</div>
-                        <div className="text-sm text-muted-foreground">{course.name}</div>
+                        <div className="font-medium">{course.name}</div>
+                        <div className="text-sm text-muted-foreground">{course.code}</div>
                     </TableCell>
                     <TableCell>{course.credits}</TableCell>
                     <TableCell className="text-right">
@@ -59,8 +59,8 @@ export default function DashboardPage() {
                 {pendingCourses.map((course) => (
                   <TableRow key={course.code}>
                     <TableCell>
-                      <div className="font-medium">{course.code}</div>
-                      <div className="text-sm text-muted-foreground">{course.name}</div>
+                      <div className="font-medium">{course.name}</div>
+                      <div className="text-sm text-muted-foreground">{course.code}</div>
                     </TableCell>
                     <TableCell>{course.credits}</TableCell>
                     <TableCell>{course.prerequisites.join(', ') || 'None'}</TableCell>
