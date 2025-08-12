@@ -31,7 +31,6 @@ export default function Header() {
           <DropdownMenuTrigger asChild>
             <Button variant="secondary" size="icon" className="rounded-full">
               <Avatar>
-                <AvatarImage src="https://placehold.co/40x40.png" alt={user.name} data-ai-hint="student avatar" />
                 <AvatarFallback>{userInitials}</AvatarFallback>
               </Avatar>
               <span className="sr-only">Toggle user menu</span>
