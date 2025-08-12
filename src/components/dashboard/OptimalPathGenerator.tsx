@@ -4,20 +4,17 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Bot, ChevronDown, Loader2, Send, Sparkles, CheckCircle } from 'lucide-react';
+import { Bot, Loader2, Send, Sparkles, CheckCircle } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from '@/components/ui/form';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { generatePathAction } from '@/lib/actions';
 import type { GenerateOptimalGraduationPathsOutput } from '@/ai/flows/generate-optimal-graduation-paths';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { Checkbox } from '../ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { pendingCourses, completedCourses } from '@/lib/data';
-import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
   completedCourses: z.string().min(1, 'Please list completed courses.'),
@@ -91,67 +88,66 @@ export default function OptimalPathGenerator() {
                <FormField
                 control={form.control}
                 name="completedCourses"
-                render={({ field }) => (
+                render={() => (
                   <FormItem>
                     <FormLabel>Completed Courses</FormLabel>
-                    <FormControl>
-                       <div className="rounded-md border border-muted/50 p-3 space-y-2">
+                    <div className="space-y-2 pt-2">
                         {completedCourses.map(course => (
                             <div key={course.code} className="flex items-center gap-2">
                                 <CheckCircle className="h-4 w-4 text-green-500" />
                                 <span className="text-sm text-muted-foreground">{course.name}</span>
                             </div>
                         ))}
-                      </div>
-                    </FormControl>
-                    <FormMessage />
+                    </div>
                   </FormItem>
                 )}
               />
               <FormField
                 control={form.control}
                 name="remainingRequirements"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col">
-                    <FormLabel>Remaining Requirements</FormLabel>
-                     <Popover>
-                        <PopoverTrigger asChild>
-                            <FormControl>
-                                <Button variant="outline" role="combobox" className={cn("w-full justify-between", !field.value?.length && "text-muted-foreground")}>
-                                    {field.value?.length ? `${field.value.length} selected` : "Select courses"}
-                                    <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                                </Button>
-                            </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
-                           <Command>
-                            <CommandInput placeholder="Search courses..." />
-                            <CommandList>
-                               <CommandEmpty>No course found.</CommandEmpty>
-                               <CommandGroup className="text-foreground">
-                                    {pendingCourses.map((course) => (
-                                        <CommandItem
-                                            key={course.code}
-                                            onSelect={() => {
-                                                const selected = field.value || [];
-                                                const newValue = selected.includes(course.code)
-                                                    ? selected.filter((c) => c !== course.code)
-                                                    : [...selected, course.code];
-                                                field.onChange(newValue);
-                                            }}
-                                        >
-                                            <Checkbox
-                                                checked={field.value?.includes(course.code)}
-                                                className="mr-2"
-                                            />
-                                            {course.name} ({course.code})
-                                        </CommandItem>
-                                    ))}
-                               </CommandGroup>
-                            </CommandList>
-                           </Command>
-                        </PopoverContent>
-                    </Popover>
+                render={() => (
+                  <FormItem>
+                    <div className="mb-4">
+                      <FormLabel>Remaining Requirements</FormLabel>
+                      <FormDescription>
+                        Select the courses you plan to take.
+                      </FormDescription>
+                    </div>
+                    <div className="space-y-2">
+                    {pendingCourses.map((item) => (
+                      <FormField
+                        key={item.code}
+                        control={form.control}
+                        name="remainingRequirements"
+                        render={({ field }) => {
+                          return (
+                            <FormItem
+                              key={item.code}
+                              className="flex flex-row items-start space-x-3 space-y-0"
+                            >
+                              <FormControl>
+                                <Checkbox
+                                  checked={field.value?.includes(item.code)}
+                                  onCheckedChange={(checked) => {
+                                    return checked
+                                      ? field.onChange([...field.value, item.code])
+                                      : field.onChange(
+                                          field.value?.filter(
+                                            (value) => value !== item.code
+                                          )
+                                        )
+                                  }}
+                                />
+                              </FormControl>
+                              <FormLabel className="font-normal">
+                                {item.name} ({item.code})
+                              </FormLabel>
+                            </FormItem>
+                          )
+                        }}
+                      />
+                    ))}
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
