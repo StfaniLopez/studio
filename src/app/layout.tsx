@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'GradPath-IA Planner',
+  title: 'GradPath-AI Planner',
   description: 'Your AI-powered university graduation planner',
 };
 

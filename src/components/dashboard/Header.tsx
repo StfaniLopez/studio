@@ -20,7 +20,7 @@ export default function Header() {
       <div className="flex items-center gap-4 flex-1 justify-center relative">
         <GraduationCap className="h-10 w-10 text-primary" />
         <h1 className="text-2xl font-semibold md:text-3xl font-headline text-primary">
-          GradPath-IA Planner
+          GradPath-AI Planner
         </h1>
       </div>
       <div className="flex items-center gap-4 absolute right-4 md:right-6">
