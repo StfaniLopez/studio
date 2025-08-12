@@ -73,7 +73,7 @@ export default function OptimalPathGenerator() {
       setLoading(false);
     }
   }
-  
+
   return (
     <div className="grid gap-6 lg:grid-cols-3">
       <Card className="lg:col-span-1">
@@ -85,123 +85,120 @@ export default function OptimalPathGenerator() {
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Left Column */}
-              <div className="space-y-8">
-                 <FormField
-                  control={form.control}
-                  name="completedCourses"
-                  render={() => (
-                    <FormItem>
-                      <FormLabel className="text-lg">Completed Courses</FormLabel>
-                      <div className="space-y-2 pt-2">
-                          {completedCourses.map(course => (
-                              <div key={course.code} className="flex items-center gap-2">
-                                  <CheckCircle className="h-4 w-4 text-green-500" />
-                                  <span className="text-sm text-muted-foreground">{course.name}</span>
-                              </div>
-                          ))}
-                      </div>
-                    </FormItem>
-                  )}
-                />
-              </div>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
+                name="completedCourses"
+                render={() => (
+                  <FormItem>
+                    <FormLabel className="text-lg">Completed Courses</FormLabel>
+                    <div className="space-y-2 pt-2">
+                        {completedCourses.map(course => (
+                            <div key={course.code} className="flex items-center gap-2">
+                                <CheckCircle className="h-4 w-4 text-green-500" />
+                                <span className="text-sm text-muted-foreground">{course.name}</span>
+                            </div>
+                        ))}
+                    </div>
+                  </FormItem>
+                )}
+              />
 
-              {/* Right Column */}
-              <div className="space-y-8">
-                <FormField
-                  control={form.control}
-                  name="remainingRequirements"
-                  render={() => (
-                    <FormItem>
-                      <div className="mb-4">
-                        <FormLabel className="text-lg">Remaining Requirements</FormLabel>
-                        <FormDescription>
-                          Select the courses you plan to take.
-                        </FormDescription>
-                      </div>
-                      <div className="space-y-3">
-                      {pendingCourses.map((item) => (
-                        <FormField
-                          key={item.code}
-                          control={form.control}
-                          name="remainingRequirements"
-                          render={({ field }) => {
-                            return (
-                              <FormItem
-                                key={item.code}
-                                className="flex flex-row items-start space-x-3 space-y-0"
-                              >
-                                <FormControl>
-                                  <Checkbox
-                                    checked={field.value?.includes(item.code)}
-                                    onCheckedChange={(checked) => {
-                                      return checked
-                                        ? field.onChange([...(field.value || []), item.code])
-                                        : field.onChange(
-                                            (field.value || []).filter(
-                                              (value) => value !== item.code
-                                            )
-                                          )
-                                    }}
-                                  />
-                                </FormControl>
-                                <FormLabel className="font-normal">
-                                  {item.name} ({item.code})
-                                </FormLabel>
-                              </FormItem>
-                            )
-                          }}
-                        />
-                      ))}
-                      </div>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="desiredGraduationTimeline"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-lg">Desired Graduation Timeline</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                              <SelectTrigger>
-                                  <SelectValue placeholder="Select a semester" />
-                              </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                              {timelineOptions.map(option => (
-                                  <SelectItem key={option} value={option}>{option}</SelectItem>
-                              ))}
-                          </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="studentProfile"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-lg">Student Profile (Optional)</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Tell us about your interests, strengths, etc." className="resize-none" {...field} />
-                      </FormControl>
+              <FormField
+                control={form.control}
+                name="remainingRequirements"
+                render={() => (
+                  <FormItem>
+                    <div className="mb-4">
+                      <FormLabel className="text-lg">Remaining Requirements</FormLabel>
                       <FormDescription>
-                          Provide a brief summary of your academic interests, strengths, or career goals to get better elective recommendations.
-                        </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                 <Button type="submit" disabled={loading} className="w-full">
-                  {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />}
-                  Generate Path
-                </Button>
-              </div>
+                        Select the courses you plan to take.
+                      </FormDescription>
+                    </div>
+                    <div className="space-y-3">
+                    {pendingCourses.map((item) => (
+                      <FormField
+                        key={item.code}
+                        control={form.control}
+                        name="remainingRequirements"
+                        render={({ field }) => {
+                          return (
+                            <FormItem
+                              key={item.code}
+                              className="flex flex-row items-start space-x-3 space-y-0"
+                            >
+                              <FormControl>
+                                <Checkbox
+                                  checked={field.value?.includes(item.code)}
+                                  onCheckedChange={(checked) => {
+                                    return checked
+                                      ? field.onChange([...(field.value || []), item.code])
+                                      : field.onChange(
+                                          (field.value || []).filter(
+                                            (value) => value !== item.code
+                                          )
+                                        )
+                                  }}
+                                />
+                              </FormControl>
+                              <FormLabel className="font-normal">
+                                {item.name} ({item.code})
+                              </FormLabel>
+                            </FormItem>
+                          )
+                        }}
+                      />
+                    ))}
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="desiredGraduationTimeline"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-lg">Desired Graduation Timeline</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select a semester" />
+                            </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                            {timelineOptions.map(option => (
+                                <SelectItem key={option} value={option}>{option}</SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="studentProfile"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-lg">Student Profile (Optional)</FormLabel>
+                    <FormControl>
+                      <Textarea placeholder="Tell us about your interests, strengths, etc." className="resize-none" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                        Provide a brief summary of your academic interests, strengths, or career goals to get better elective recommendations.
+                      </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <Button type="submit" disabled={loading} className="w-full">
+                {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />}
+                Generate Path
+              </Button>
             </form>
           </Form>
         </CardContent>
