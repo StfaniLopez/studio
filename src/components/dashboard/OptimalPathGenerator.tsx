@@ -18,6 +18,7 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Checkbox } from '../ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { pendingCourses } from '@/lib/data';
+import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
   completedCourses: z.string().min(1, 'Please list completed courses.'),
@@ -186,8 +187,6 @@ export default function OptimalPathGenerator() {
               />
               <Button type="submit" disabled={loading} className="w-full">
                 {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />}
-                Generate Path
-              </a-4 w-4" />}
                 Generate Path
               </Button>
             </form>
