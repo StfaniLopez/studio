@@ -96,7 +96,9 @@ export default function OptimalPathGenerator() {
                   <FormItem>
                     <FormLabel>Completed Courses</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., CS101, MATH101" {...field} readOnly className="bg-muted" />
+                       <div className="p-3 rounded-md bg-muted/50 text-sm text-muted-foreground">
+                        {completedCourses.map(course => course.name).join(', ')}
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
