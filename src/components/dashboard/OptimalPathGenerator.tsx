@@ -159,7 +159,7 @@ export default function OptimalPathGenerator() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-lg">Desired Graduation Timeline</FormLabel>
-                     <Select onValuechange={field.onChange} defaultValue={field.value}>
+                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                             <SelectTrigger>
                                 <SelectValue placeholder="Select a semester" />
@@ -220,12 +220,11 @@ export default function OptimalPathGenerator() {
               <div>
                 <h3 className="flex items-center gap-2 font-semibold text-lg mb-4"><BookOpen className="h-5 w-5" />Optimal Graduation Path</h3>
                 <div className="space-y-4">
-                  {result.optimalPath.map((course, index) => (
+                  {result.optimalPath.map((courseCode, index) => (
                      <div key={index} className="flex items-start rounded-lg bg-secondary p-4">
                        <span className="font-mono text-sm bg-primary/10 text-primary font-semibold rounded-md px-2.5 py-1 mr-4">{index + 1}</span>
                        <div className="flex-1">
-                        <p className="font-medium">{course.name} <span className="text-xs text-muted-foreground">({course.code})</span></p>
-                        <p className="text-sm text-muted-foreground mt-1">{course.benefit}</p>
+                        <p className="font-medium">{courseCode}</p>
                        </div>
                      </div>
                   ))}
@@ -236,10 +235,9 @@ export default function OptimalPathGenerator() {
                 <h3 className="flex items-center gap-2 font-semibold text-lg mb-4"><Lightbulb className="h-5 w-5" />Elective Recommendations</h3>
                  <p className="text-sm text-muted-foreground mb-4">Based on your profile, here are some electives you might enjoy:</p>
                 <div className="space-y-4">
-                  {result.electiveRecommendations.map((elective, index) => (
+                  {result.electiveRecommendations.map((electiveCode, index) => (
                     <div key={index} className="p-4 rounded-lg border bg-card hover:bg-secondary/80 transition-colors">
-                      <p className="font-medium text-primary">{elective.name} <span className="text-xs text-muted-foreground">({elective.code})</span></p>
-                       <p className="text-sm text-muted-foreground mt-1">{elective.benefit}</p>
+                      <p className="font-medium text-primary">{electiveCode}</p>
                     </div>
                   ))}
                 </div>

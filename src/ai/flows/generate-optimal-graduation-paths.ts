@@ -10,12 +10,6 @@
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
-const CourseRecommendationSchema = z.object({
-  code: z.string().describe('The course code, e.g., "CS101".'),
-  name: z.string().describe('The full name of the course, e.g., "Introduction to Programming".'),
-  benefit: z.string().describe('A brief comment on the benefit of taking this course.'),
-});
-
 const GenerateOptimalGraduationPathsInputSchema = z.object({
   completedCourses: z
     .array(z.string())
@@ -43,14 +37,14 @@ export type GenerateOptimalGraduationPathsInput = z.infer<
 
 const GenerateOptimalGraduationPathsOutputSchema = z.object({
   optimalPath: z
-    .array(CourseRecommendationSchema)
+    .array(z.string())
     .describe(
-      'A list of course objects representing the optimal graduation path, ordered by semester.'
+      'A list of course codes representing the optimal graduation path, ordered by semester.'
     ),
   electiveRecommendations: z
-    .array(CourseRecommendationSchema)
+    .array(z.string())
     .describe(
-      'A list of recommended elective course objects based on the student profile.'
+      'A list of recommended elective course codes based on the student profile.'
     ),
   estimatedGraduationTime: z
     .string()
@@ -80,8 +74,8 @@ const prompt = ai.definePrompt({
   Student Profile: {{studentProfile}}
 
   Based on this information, generate an optimal graduation path, recommend electives, and estimate the graduation time.
-  The optimal path should be a list of courses ordered by semester. For each course, provide the course code, full course name, and a brief comment on the benefit of taking this course.
-  The elective recommendations should also include the course code, full name, and benefit.
+  The optimal path should be a list of course codes ordered by semester.
+  The elective recommendations should also be a list of course codes.
   The estimated graduation time should be a string.
   Make sure to consider course prerequisites when generating the optimal path.
   The optimal path should be as efficient as possible, allowing the student to graduate on time.
