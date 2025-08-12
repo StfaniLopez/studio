@@ -128,7 +128,7 @@ export default function OptimalPathGenerator() {
                             <CommandInput placeholder="Search courses..." />
                             <CommandList>
                                <CommandEmpty>No course found.</CommandEmpty>
-                               <CommandGroup>
+                               <CommandGroup className="text-foreground">
                                     {pendingCourses.map((course) => (
                                         <CommandItem
                                             key={course.code}
