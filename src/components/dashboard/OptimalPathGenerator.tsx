@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Bot, Loader2, Send, Sparkles, CheckCircle } from 'lucide-react';
+import { Bot, Loader2, Send, Sparkles, CheckCircle, Lightbulb, BookOpen } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from '@/components/ui/form';
@@ -15,6 +15,7 @@ import type { GenerateOptimalGraduationPathsOutput } from '@/ai/flows/generate-o
 import { Checkbox } from '../ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { pendingCourses, completedCourses } from '@/lib/data';
+import { Separator } from '../ui/separator';
 
 const formSchema = z.object({
   completedCourses: z.string().min(1, 'Please list completed courses.'),
@@ -158,7 +159,7 @@ export default function OptimalPathGenerator() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-lg">Desired Graduation Timeline</FormLabel>
-                     <Select onValueChange={field.onChange} defaultValue={field.value}>
+                     <Select onValuechange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                             <SelectTrigger>
                                 <SelectValue placeholder="Select a semester" />
@@ -213,27 +214,32 @@ export default function OptimalPathGenerator() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2"><Sparkles className="text-primary" /> AI-Generated Results</CardTitle>
+              <CardDescription>Estimated Graduation: <span className="font-bold text-primary">{result.estimatedGraduationTime}</span></CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
-                <h3 className="font-semibold text-lg mb-2">Optimal Graduation Path</h3>
-                <p className="text-sm text-muted-foreground">Estimated Graduation: <span className="font-bold text-primary">{result.estimatedGraduationTime}</span></p>
-                <div className="mt-4 grid gap-2">
+                <h3 className="flex items-center gap-2 font-semibold text-lg mb-4"><BookOpen className="h-5 w-5" />Optimal Graduation Path</h3>
+                <div className="space-y-4">
                   {result.optimalPath.map((course, index) => (
-                     <div key={index} className="flex items-center rounded-lg bg-secondary p-3">
-                       <span className="font-mono text-sm bg-primary/10 text-primary font-semibold rounded-md px-2 py-1 mr-4">{index + 1}</span>
-                       <span className="font-medium">{course}</span>
+                     <div key={index} className="flex items-start rounded-lg bg-secondary p-4">
+                       <span className="font-mono text-sm bg-primary/10 text-primary font-semibold rounded-md px-2.5 py-1 mr-4">{index + 1}</span>
+                       <div className="flex-1">
+                        <p className="font-medium">{course.name} <span className="text-xs text-muted-foreground">({course.code})</span></p>
+                        <p className="text-sm text-muted-foreground mt-1">{course.benefit}</p>
+                       </div>
                      </div>
                   ))}
                 </div>
               </div>
-              <div className="border-t pt-6">
-                <h3 className="font-semibold text-lg mb-2">Elective Recommendations</h3>
-                <p className="text-sm text-muted-foreground mb-4">Based on your profile, here are some electives you might enjoy:</p>
-                <div className="grid gap-2 sm:grid-cols-2">
+              <Separator />
+              <div>
+                <h3 className="flex items-center gap-2 font-semibold text-lg mb-4"><Lightbulb className="h-5 w-5" />Elective Recommendations</h3>
+                 <p className="text-sm text-muted-foreground mb-4">Based on your profile, here are some electives you might enjoy:</p>
+                <div className="space-y-4">
                   {result.electiveRecommendations.map((elective, index) => (
-                    <div key={index} className="p-3 rounded-md border bg-card hover:bg-secondary transition-colors">
-                      <p className="font-medium">{elective}</p>
+                    <div key={index} className="p-4 rounded-lg border bg-card hover:bg-secondary/80 transition-colors">
+                      <p className="font-medium text-primary">{elective.name} <span className="text-xs text-muted-foreground">({elective.code})</span></p>
+                       <p className="text-sm text-muted-foreground mt-1">{elective.benefit}</p>
                     </div>
                   ))}
                 </div>
