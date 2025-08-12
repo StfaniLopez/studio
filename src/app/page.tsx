@@ -5,12 +5,14 @@ import DashboardPage from '@/components/dashboard/DashboardPage';
 import OptimalPathGenerator from '@/components/dashboard/OptimalPathGenerator';
 import ElectiveRecommender from '@/components/dashboard/ElectiveRecommender';
 import GraduationPredictor from '@/components/dashboard/GraduationPredictor';
+import UserInfoCard from '@/components/dashboard/UserInfoCard';
 
 export default function Home() {
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
       <Header />
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+        <UserInfoCard />
         <Tabs defaultValue="dashboard" className="grid w-full gap-4">
           <TabsList className="grid w-full grid-cols-2 h-auto md:grid-cols-4">
             <TabsTrigger value="dashboard" className="text-base">
