@@ -16,7 +16,7 @@ export default function Header() {
     <header className="sticky top-0 flex h-20 items-center gap-4 border-b bg-card px-4 md:px-6 z-50">
       <div className="flex items-center gap-4 flex-1 justify-center relative">
         <GraduationCap className="h-10 w-10 text-primary" />
-        <h1 className="text-2xl font-semibold md:text-3xl font-headline">
+        <h1 className="text-2xl font-semibold md:text-3xl font-headline text-primary">
           GradPath-IA Planner
         </h1>
       </div>
