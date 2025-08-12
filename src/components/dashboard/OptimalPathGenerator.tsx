@@ -95,7 +95,7 @@ export default function OptimalPathGenerator() {
                   <FormItem>
                     <FormLabel>Completed Courses</FormLabel>
                     <FormControl>
-                       <div className="space-y-2 rounded-md border border-muted/50 p-3">
+                       <div className="rounded-md border border-muted/50 p-3 space-y-2">
                         {completedCourses.map(course => (
                             <div key={course.code} className="flex items-center gap-2">
                                 <CheckCircle className="h-4 w-4 text-green-500" />
