@@ -8,41 +8,41 @@ body {
 
 @layer base {
   :root {
-    --background: 206 82% 60%;
-    --foreground: 0 0% 98%;
+ --background: 0 0% 100%; /* White background */
+ --foreground: 210 10% 3.9%; /* Corresponds to #2b2a2a */
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 210 10% 3.9%; /* Corresponds to #2b2a2a */
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 221 83% 53%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
+    --popover-foreground: 210 10% 3.9%; /* Corresponds to #2b2a2a */
+    --primary: 255 57% 72%; /* Corresponds to #968ce4 */
+    --primary-foreground: 210 10% 3.9%; /* Corresponds to #2b2a2a */
+    --secondary: 0 0% 100%;
+    --secondary-foreground: 255 57% 72%; /* Corresponds to #968ce4 */
+ --muted: 0 0% 100%; /* White for muted background */
+    --muted-foreground: 225 2% 40%;
+    --accent: 336 89% 84%; /* Corresponds to #f7b8d2 */
+    --accent-foreground: 210 10% 3.9%; /* Corresponds to #2b2a2a */
+ --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 221 83% 53%;
-    --chart-1: 12 76% 61%;
+    --border: 255 57% 72%; /* Corresponds to #968ce4 */
+    --input: 240 5.9% 90%; /* Kept as is, adjust if needed */
+    --ring: 255 57% 72%; /* Corresponds to #968ce4 */
+    --chart-1: 255 57% 72%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+ --radius: 0.5rem; /* Kept as is */
   }
   .dark {
-    --background: 240 10% 3.9%;
+    --background: 240 10% 3.9%; /* Kept as is */
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 240 5.9% 10%;
+    --primary: 255 57% 72%;
+    --primary-foreground: 210 10% 3.9%;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 240 3.7% 15.9%;
@@ -51,7 +51,7 @@ body {
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
+    --border: 255 57% 72%;
     --input: 240 3.7% 15.9%;
     --ring: 210 40% 98%;
     --chart-1: 220 70% 50%;
@@ -67,6 +67,7 @@ body {
     @apply border-border;
   }
   body {
+    /* Applying background and text colors using Tailwind classes based on CSS variables */
     @apply bg-background text-foreground;
   }
 }

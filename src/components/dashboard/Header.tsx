@@ -9,24 +9,24 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import ApiKeyStatus from '../ApiKeyStatus';
 import { user } from '@/lib/data';
 
 export default function Header() {
-  const userInitials = user.name.split(' ').map(n => n[0]).join('');
+  const userInitials = user.name
+    .split(' ')
+    .map((n) => n[0])
+    .join('');
 
   return (
-    <header className="sticky top-0 flex h-20 items-center gap-4 border-b bg-card px-4 md:px-6 z-50">
-      <div className="flex items-center gap-4 flex-1 justify-center relative">
-        <GraduationCap className="h-10 w-10 text-primary" />
-        <h1 className="text-2xl font-semibold md:text-3xl font-headline text-primary">
-          GradPath-AI Planner
-        </h1>
-      </div>
-      <div className="flex items-center gap-4 absolute right-4 md:right-6">
-        <div className="hidden sm:flex">
-          <ApiKeyStatus />
-        </div>
+    <header className="sticky top-0 flex h-20 items-center gap-4 border-b px-4 md:px-6 z-50" style={{ backgroundColor: '#e8e4ff' }}>
+      <GraduationCap className="h-10 w-10 text-primary" />
+      <h1 className="text-2xl font-semibold md:text-3xl font-headline" style={{ color: '#2b2a2a' }}>
+        GradPath-AI Planner
+      </h1>
+
+      {/* User Dropdown - Aligned to the right */}
+      <div className="ml-auto flex items-center gap-4">
+        <div className="hidden sm:flex"></div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="secondary" size="icon" className="rounded-full">
@@ -37,8 +37,6 @@ export default function Header() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
-            <DropdownMenuSeparator />
             <DropdownMenuItem>
               <User className="mr-2 h-4 w-4" />
               <span>Profile</span>
@@ -55,6 +53,5 @@ export default function Header() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    </header>
   );
 }

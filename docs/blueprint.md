@@ -13,8 +13,11 @@
 ## Style Guidelines:
 
 - Primary color: Deep purple (#673ab7) to evoke intellectual curiosity.
-- Background color: Light grey (#f5f3f6), a very low saturation version of the purple
-- Accent color: Blue (#3f51b5) for interactive elements and highlights, to indicate trustworthiness.
+- Primary color: #968ce4
+- Accent color: #f7b8d2
+- Primary text color: #2b2a2a
+- Secondary text color: #646363
+- Background: Light grey.
 - Body and headline font: 'Inter' (sans-serif) for a modern and clean interface.
 - Code font: 'Source Code Pro' for displaying code snippets.
 - Use clear, professional icons to represent different course categories and actions.

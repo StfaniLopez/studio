@@ -33,7 +33,7 @@ export default function DashboardPage() {
                     </TableCell>
                     <TableCell>{course.credits}</TableCell>
                     <TableCell className="text-right">
-                      <Badge variant="default" className="bg-green-500">{course.grade}</Badge>
+                      <Badge variant="default">{course.grade}</Badge>
                     </TableCell>
                   </TableRow>
                 ))}

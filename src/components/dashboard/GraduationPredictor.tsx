@@ -7,48 +7,69 @@ import { z } from 'zod';
 import { BarChart, Loader2, Send, Sparkles } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from '@/components/ui/form';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { predictGraduationAction } from '@/lib/actions';
 import type { PredictGraduationTimeOutput } from '@/ai/flows/predict-graduation-time';
 import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Separator } from '@/components/ui/separator';
 
+// Placeholder for the chart component (replace with a real chart library)
+const GraduationChart = ({ data }: { data: PredictGraduationTimeOutput | null }) => <div>Chart Placeholder</div>;
 const formSchema = z.object({
   completedCredits: z.coerce.number().min(0, 'Credits must be non-negative.'),
-  totalCreditsRequired: z.coerce.number().min(1, 'Total credits must be positive.'),
-  plannedCourses: z.string().min(1, 'Please list planned courses.'),
-  averageGpa: z.coerce.number().min(0).max(4, 'GPA must be between 0 and 4.'),
-  historicalGraduationData: z.string().min(1, 'Please provide historical data.'),
+  // We are removing the input fields, so these are no longer required in the schema
 });
 
 export default function GraduationPredictor() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<PredictGraduationTimeOutput | null>(null);
+  const [showChart, setShowChart] = useState(false);
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState<
+    { title: string; description: string }[]
+  >([]);
+
+  // State for each checkbox
+  const [includeCompletedCredits, setIncludeCompletedCredits] = useState(true);
+  const [includeTotalCredits, setIncludeTotalCredits] = useState(true);
+  const [includeAverageGpa, setIncludeAverageGpa] = useState(true);
+  const [includePlannedCourses, setIncludePlannedCourses] = useState(true);
+  const [includeHistoricalData, setIncludeHistoricalData] = useState(true);
+
+  // Define titles and descriptions for each checkbox
+  const checkboxOptions = [
+  { id: 'completedCredits', title: 'Include Completed Credits', description: 'Include the number of credits you have completed so far.', state: includeCompletedCredits, setState: setIncludeCompletedCredits },
+  { id: 'totalCredits', title: 'Include Total Credits', description: 'Include the total number of credits required for your degree.', state: includeTotalCredits, setState: setIncludeTotalCredits },
+  { id: 'averageGpa', title: 'Include Average GPA', description: 'Include your current average GPA.', state: includeAverageGpa, setState: setIncludeAverageGpa },
+  { id: 'plannedCourses', title: 'Include Planned Courses', description: 'List your planned future courses and their credits.', state: includePlannedCourses, setState: setIncludePlannedCourses },
+  { id: 'historicalData', title: 'Include Historical Data', description: 'Provide a summary of historical graduation trends or data relevant to your situation.', state: includeHistoricalData, setState: setIncludeHistoricalData },
+  { id: 'showLineChart', title: 'Show Line Chart', description: 'Visualize the predicted graduation timeline with a line chart.', state: showChart, setState: setShowChart },
+  ];
+
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      completedCredits: 60,
-      totalCreditsRequired: 120,
-      plannedCourses: 'Fall 2025: CS401 (3 credits), CS402 (3 credits). Spring 2026: CS499 (6 credits).',
-      averageGpa: 3.5,
-      historicalGraduationData: 'For computer science majors, average graduation time is 4.5 years. 80% of students with GPA > 3.0 graduate within 5 years.',
-    },
   });
-
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setLoading(true);
-    setResult(null);
-    try {
-      const response = await predictGraduationAction(values);
-      if (response) {
-        setResult(response);
-      } else {
-        throw new Error('No response from AI');
-      }
+    // Instead of predicting, collect and display selected checkbox info
+    const selected = checkboxOptions
+      .filter(option => option.state)
+      .map(option => ({
+        title: option.title,
+        description: option.description,
+      }));
+
+    setSelectedCheckboxes(selected);
+    setResult(null); // Clear previous prediction result
+    setLoading(false); // Ensure loading is false
+
+    // The original prediction logic is commented out as per the instruction
+    /*
+    // ... (original prediction logic)
     } catch (error) {
       console.error(error);
       toast({
@@ -59,6 +80,7 @@ export default function GraduationPredictor() {
     } finally {
       setLoading(false);
     }
+    */
   }
 
   const getConfidenceBadgeClass = (level: string) => {
@@ -85,46 +107,35 @@ export default function GraduationPredictor() {
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <FormField control={form.control} name="completedCredits" render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Completed Credits</FormLabel>
-                      <FormControl><Input type="number" {...field} /></FormControl>
-                      <FormMessage />
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              {/* Checkboxes with Descriptions */}
+              <div className="space-y-4">
+                {checkboxOptions.map((option) => (
+                  <FormField
+                    key={option.id}
+                    control={form.control}
+                    name={option.id as keyof z.infer<typeof formSchema>} // Type assertion, as these don't directly map to schema fields anymore
+                    render={() => (
+                      <FormItem className="space-y-2">
+                        <FormLabel htmlFor={option.id}>{option.title}</FormLabel>
+                      <div className="flex items-center space-x-2">
+                        <FormControl>
+                          <Checkbox
+                            checked={option.state}
+                            onCheckedChange={option.setState}
+                            id={option.id}
+                          />
+                        </FormControl>
+                        <p className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Select to include</p>
+                      </div>
+                      <FormDescription>{option.description}</FormDescription>
                     </FormItem>
                   )}
                 />
-                 <FormField control={form.control} name="totalCreditsRequired" render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Total Credits</FormLabel>
-                      <FormControl><Input type="number" {...field} /></FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                ))}
               </div>
-              <FormField control={form.control} name="averageGpa" render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Average GPA</FormLabel>
-                  <FormControl><Input type="number" step="0.1" {...field} /></FormControl>
-                  <FormMessage />
-                </FormItem>
-              )} />
-              <FormField control={form.control} name="plannedCourses" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Planned Courses</FormLabel>
-                    <FormControl><Textarea placeholder="List future courses and credits..." {...field} /></FormControl>
-                    <FormMessage />
-                  </FormItem>
-              )} />
-              <FormField control={form.control} name="historicalGraduationData" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Historical Data</FormLabel>
-                    <FormControl><Textarea placeholder="Provide summary of graduation rates..." {...field} /></FormControl>
-                    <FormMessage />
-                  </FormItem>
-              )} />
+
+
               <Button type="submit" disabled={loading} className="w-full">
                 {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />}
                 Predict Graduation
@@ -169,6 +180,28 @@ export default function GraduationPredictor() {
             </CardFooter>
           </Card>
         )}
+
+        {/* Display Selected Checkbox Info */}
+        {selectedCheckboxes.length > 0 && (
+          <Card className="mt-6">
+            <CardHeader><CardTitle>Selected Options</CardTitle></CardHeader>
+            <CardContent className="space-y-4">
+              {selectedCheckboxes.map((item, index) => (
+                <div key={index}>
+                  <h3 className="font-semibold">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground">{item.description}</p>
+                  {index < selectedCheckboxes.length - 1 && <Separator className="my-4" />}
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Chart Placeholder */}
+        {!loading && result && showChart && (
+          <GraduationChart data={result} />
+        )}
+
          {!loading && !result && (
             <Card className="flex h-full min-h-[500px] items-center justify-center border-dashed">
                 <div className="text-center text-muted-foreground">
