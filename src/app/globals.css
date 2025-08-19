@@ -8,21 +8,21 @@ body {
 
 @layer base {
   :root {
- --background: 0 0% 100%; /* White background */
- --foreground: 210 10% 3.9%; /* Corresponds to #2b2a2a */
+    --background: 255 100% 98%; /* Light pastel background */
+    --foreground: 240 8% 15%; /* Slightly less dark text for softer contrast */
     --card: 0 0% 100%;
-    --card-foreground: 210 10% 3.9%; /* Corresponds to #2b2a2a */
+    --card-foreground: 240 8% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 210 10% 3.9%; /* Corresponds to #2b2a2a */
-    --primary: 255 57% 72%; /* Corresponds to #968ce4 */
-    --primary-foreground: 210 10% 3.9%; /* Corresponds to #2b2a2a */
+    --popover-foreground: 240 8% 15%;
+    --primary: 260 60% 70%; /* A slightly different purple pastel */
+    --primary-foreground: 0 0% 98%; /* White text for primary buttons */
     --secondary: 0 0% 100%;
-    --secondary-foreground: 255 57% 72%; /* Corresponds to #968ce4 */
- --muted: 0 0% 100%; /* White for muted background */
+    --secondary-foreground: 260 60% 70%; /* Secondary text color matching primary */
+    --muted: 255 100% 96%; /* Lighter pastel for muted elements */
     --muted-foreground: 225 2% 40%;
-    --accent: 336 89% 84%; /* Corresponds to #f7b8d2 */
-    --accent-foreground: 210 10% 3.9%; /* Corresponds to #2b2a2a */
- --destructive: 0 84.2% 60.2%;
+    --accent: 300 60% 80%; /* A pinkish pastel accent */
+    --accent-foreground: 240 8% 15%;
+    --destructive: 0 80% 60%; /* Adjusted destructive color */
     --destructive-foreground: 0 0% 98%;
     --border: 255 57% 72%; /* Corresponds to #968ce4 */
     --input: 240 5.9% 90%; /* Kept as is, adjust if needed */
@@ -34,24 +34,24 @@ body {
     --chart-5: 27 87% 67%;
  --radius: 0.5rem; /* Kept as is */
   }
-  .dark {
+  .dark { /* Minimal adjustments for dark mode, can be further refined */
     --background: 240 10% 3.9%; /* Kept as is */
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 255 57% 72%;
-    --primary-foreground: 210 10% 3.9%;
-    --secondary: 240 3.7% 15.9%;
+    --primary: 260 60% 70%;
+    --primary-foreground: 240 10% 3.9%;
+    --secondary: 240 5% 25%; /* Slightly adjusted secondary in dark mode */
     --secondary-foreground: 0 0% 98%;
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
+    --accent: 300 60% 80%; /* Using the same accent in dark mode */
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 70% 50%; /* Adjusted destructive for dark mode */
     --destructive-foreground: 0 0% 98%;
-    --border: 255 57% 72%;
+    --border: 260 60% 70%; /* Border color matching primary */
     --input: 240 3.7% 15.9%;
     --ring: 210 40% 98%;
     --chart-1: 220 70% 50%;

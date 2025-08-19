@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen w-full flex-col">
       <Header />
-      <main className="flex flex-1 flex-col">
+      <main className="flex flex-1 flex-col p-4 md:p-6">
         <div className="mx-auto grid w-full max-w-6xl gap-6">
           <UserInfoCard />
           <Tabs defaultValue="dashboard" className="grid w-full gap-4">

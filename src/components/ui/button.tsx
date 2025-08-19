@@ -9,14 +9,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default: "bg-[#a78bfa] text-white hover:bg-[#9373ee] transition-colors duration-200", // Pastel purple background, white text, subtle hover
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+          "border border-[#a78bfa] text-[#a78bfa] bg-transparent hover:bg-[#e8e4ff] hover:text-[#8b5cf6] transition-colors duration-200", // Purple border and text, light purple hover background
         secondary:
-          "bg-transparent border border-primary text-primary hover:bg-primary/5",
+          "bg-transparent border border-[#d8b4fe] text-[#a78bfa] hover:bg-[#f3e8ff] transition-colors duration-200", // Lighter purple border, pastel purple text, very light purple hover
         ghost: "hover:bg-accent hover:text-accent-foreground",
-
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {

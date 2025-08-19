@@ -135,7 +135,7 @@ export default function ElectiveRecommender() {
                     <h3 className="font-semibold text-lg mb-4">Recommended Electives</h3>
                      <div className="grid gap-3 sm:grid-cols-2">
                         {result.electiveRecommendations.map((elective, index) => (
-                            <div key={index} className="p-4 rounded-md border bg-card hover:bg-secondary transition-colors">
+                            <div key={index} className="p-4 rounded-md border bg-card hover:bg-secondary transition-colors shadow-sm hover:shadow-md cursor-pointer">
                                 <p className="font-medium text-primary">{elective}</p>
                             </div>
                         ))}
