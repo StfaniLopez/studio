@@ -1,5 +1,6 @@
+import Link from 'next/link';
 import { GraduationCap, User, LogOut, Settings } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,44 +19,45 @@ export default function Header() {
     .join('');
 
   return (
-    <header className="sticky top-0 flex h-20 items-center gap-4 border-b px-4 md:px-6 z-50 bg-white text-black">
-      <GraduationCap className="h-10 w-10 text-primary" /> {/* Adjusted icon color */}
-      <h1 className="text-2xl font-semibold md:text-3xl font-headline text-primary">
-        <span className="text-black">GradPath - </span>
-        <span className="text-primary">LEAD University</span>
- </h1>
+    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 z-50">
+       <Link href="/" className="flex items-center gap-2 text-lg font-semibold md:text-base">
+        <GraduationCap className="h-8 w-8 text-primary" />
+        <h1 className="text-xl font-bold">GradPath-AI Planner</h1>
+      </Link>
 
- {/* User Dropdown - Aligned to the right */}
- <div className="ml-auto flex items-center gap-4">
- {/* <div className="hidden sm:flex"></div> */} {/* Removed unnecessary div */}
- <DropdownMenu>
- <DropdownMenuTrigger asChild>
- <Button variant="secondary" size="icon" className="rounded-full">
- <Avatar className="h-10 w-10">
- <AvatarFallback className="text-primary">{userInitials}</AvatarFallback>
- </Avatar>
- <span className="sr-only">Toggle user menu</span>
- </Button>
- </DropdownMenuTrigger>
- <DropdownMenuContent align="end">
- <DropdownMenuLabel>My Account</DropdownMenuLabel>
- <DropdownMenuSeparator />
- <DropdownMenuItem className="text-black hover:bg-accent cursor-pointer"> {/* Added hover style and cursor */}
- <User className="mr-2 h-4 w-4" /> {/* Adjusted icon color */}
- <span>Profile</span>
- </DropdownMenuItem>
- <DropdownMenuItem className="text-black hover:bg-accent cursor-pointer"> {/* Added hover style and cursor */}
- <Settings className="mr-2 h-4 w-4 text-gray-600" /> {/* Adjusted icon color */}
- <span>Settings</span>
- </DropdownMenuItem>
- <DropdownMenuSeparator className="bg-gray-200" /> {/* Adjusted separator color */}
- <DropdownMenuItem>
- <LogOut className="mr-2 h-4 w-4" />
- <span>Logout</span>
- </DropdownMenuItem>
- </DropdownMenuContent>
- </DropdownMenu>
- </div>
- </header>
+     <div className="ml-auto flex items-center gap-4">
+       <DropdownMenu>
+         <DropdownMenuTrigger asChild>
+           <Button variant="secondary" size="icon" className="rounded-full">
+             <Avatar className="h-9 w-9">
+               <AvatarFallback className="bg-primary text-primary-foreground">{userInitials}</AvatarFallback>
+             </Avatar>
+             <span className="sr-only">Toggle user menu</span>
+           </Button>
+         </DropdownMenuTrigger>
+         <DropdownMenuContent align="end">
+           <DropdownMenuLabel>My Account</DropdownMenuLabel>
+           <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link href="/profile">
+                <User className="mr-2" />
+                <span>Profile</span>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+               <Link href="/settings">
+                <Settings className="mr-2" />
+                <span>Settings</span>
+              </Link>
+            </DropdownMenuItem>
+           <DropdownMenuSeparator />
+           <DropdownMenuItem>
+             <LogOut className="mr-2" />
+             <span>Logout</span>
+           </DropdownMenuItem>
+         </DropdownMenuContent>
+       </DropdownMenu>
+     </div>
+    </header>
   );
 }

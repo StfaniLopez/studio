@@ -1,3 +1,5 @@
+"use client";
+
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import {
   User,
@@ -6,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
+  updatePassword,
 } from 'firebase/auth';
 import { auth } from '@/lib/firebase'; // Assuming firebase.ts is in lib directory
 
@@ -17,6 +20,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   updateUserProfile: (displayName: string, photoURL?: string) => Promise<void>;
+  updatePassword: (newPassword: string) => Promise<void>; // Added for settings page
   error: string | null;
 }
 
@@ -76,22 +80,53 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const updateUserProfile = async (displayName: string, photoURL?: string): Promise<void> => {
     setError(null);
-    if (user) {
+    if (auth.currentUser) {
       try {
-        await updateProfile(user, { displayName, photoURL });
-        setUser({ ...user, displayName, photoURL }); // Manually update state as updateProfile might not trigger onAuthStateChanged immediately
+        await updateProfile(auth.currentUser, { displayName, photoURL });
+        // Create a new user object to force a state update in React
+        setUser(prevUser => prevUser ? ({ ...prevUser, displayName, photoURL }) : null);
       } catch (err: any) {
         setError(err.message);
         throw err; // Re-throw to allow component to handle
       }
     } else {
-      setError("No user is logged in.");
-      throw new Error("No user is logged in.");
+      const noUserError = new Error("No user is logged in.");
+      setError(noUserError.message);
+      throw noUserError;
     }
   };
 
+  const handleUpdatePassword = async (newPassword: string): Promise<void> => {
+    setError(null);
+    if (auth.currentUser) {
+        try {
+            await updatePassword(auth.currentUser, newPassword);
+        } catch (err: any) {
+            setError(err.message);
+            throw err;
+        }
+    } else {
+        const noUserError = new Error("No user is logged in to update password.");
+        setError(noUserError.message);
+        throw noUserError;
+    }
+  };
+
+
+  const value = {
+    user,
+    loading,
+    signup,
+    login,
+    logout,
+    updateUserProfile,
+    updatePassword: handleUpdatePassword,
+    error
+  };
+
+
   return (
-    <AuthContext.Provider value={{ user, loading, signup, login, logout, updateUserProfile, error }}>
+    <AuthContext.Provider value={value}>
       {!loading && children}
     </AuthContext.Provider>
   );
