@@ -149,7 +149,7 @@ export default function OptimalPathGenerator() {
                                     }}
                                   />
                                 </FormControl>
-                                <FormLabel className="font-normal">
+                                <FormLabel className="font-normal leading-relaxed">
                                   {course.name} ({course.code})
                                 </FormLabel>
                               </FormItem>
