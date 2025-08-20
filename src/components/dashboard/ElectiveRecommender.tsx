@@ -72,7 +72,7 @@ export default function ElectiveRecommender() {
                 name="academicHistory"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg p-2 rounded-md bg-secondary text-secondary-foreground inline-block">Academic History</FormLabel>
+                    <FormLabel className="text-lg p-2 rounded-md bg-muted text-muted-foreground">Academic History</FormLabel>
                     <FormControl>
                       <Textarea placeholder="e.g., Courses taken, grades, strengths..." className="resize-none" {...field} rows={4} />
                     </FormControl>
@@ -85,7 +85,7 @@ export default function ElectiveRecommender() {
                 name="interests"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg p-2 rounded-md bg-secondary text-secondary-foreground inline-block">Interests & Hobbies</FormLabel>
+                    <FormLabel className="text-lg p-2 rounded-md bg-muted text-muted-foreground">Interests & Hobbies</FormLabel>
                     <FormControl>
                       <Textarea placeholder="e.g., Hackathons, painting, chess..." className="resize-none" {...field} rows={4} />
                     </FormControl>
@@ -98,7 +98,7 @@ export default function ElectiveRecommender() {
                 name="careerGoals"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg p-2 rounded-md bg-secondary text-secondary-foreground inline-block">Career Goals</FormLabel>
+                    <FormLabel className="text-lg p-2 rounded-md bg-muted text-muted-foreground">Career Goals</FormLabel>
                     <FormControl>
                       <Textarea placeholder="e.g., Software Engineer, UX Designer..." className="resize-none" {...field} rows={4} />
                     </FormControl>

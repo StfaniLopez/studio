@@ -93,7 +93,7 @@ export default function OptimalPathGenerator() {
                  <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="item-1">
                     <AccordionTrigger className="hover:no-underline">
-                      <FormLabel className="text-lg p-2 rounded-md bg-secondary text-secondary-foreground inline-block">Completed Courses</FormLabel>
+                      <FormLabel className="text-lg p-2 rounded-md bg-muted text-muted-foreground w-full">Completed Courses</FormLabel>
                     </AccordionTrigger>
                     <AccordionContent>
                       <div className="space-y-2 pt-2">
@@ -116,7 +116,7 @@ export default function OptimalPathGenerator() {
                 render={({ field }) => (
                   <FormItem>
                     <div className="mb-4 flex items-center gap-2">
-                      <FormLabel className="text-lg p-2 rounded-md bg-secondary text-secondary-foreground inline-block">Remaining Requirements</FormLabel>
+                      <FormLabel className="text-lg p-2 rounded-md bg-muted text-muted-foreground w-full">Remaining Requirements</FormLabel>
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
@@ -173,7 +173,7 @@ export default function OptimalPathGenerator() {
                 name="desiredGraduationTimeline"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg p-2 rounded-md bg-secondary text-secondary-foreground inline-block">Desired Graduation Timeline</FormLabel>
+                    <FormLabel className="text-lg p-2 rounded-md bg-muted text-muted-foreground w-full">Desired Graduation Timeline</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                             <SelectTrigger>
@@ -196,7 +196,7 @@ export default function OptimalPathGenerator() {
                 name="studentProfile"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg p-2 rounded-md bg-secondary text-secondary-foreground inline-block">Student Profile (Optional)</FormLabel>
+                    <FormLabel className="text-lg p-2 rounded-md bg-muted text-muted-foreground w-full">Student Profile (Optional)</FormLabel>
                     <FormControl>
                       <Textarea placeholder="Tell us about your interests, strengths, etc." className="resize-none" {...field} />
                     </FormControl>
