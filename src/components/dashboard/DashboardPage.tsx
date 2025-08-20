@@ -23,9 +23,9 @@ export default function DashboardPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Course</TableHead>
-                  <TableHead>Credits</TableHead>
-                  <TableHead className="text-right">Grade</TableHead>
+                  <TableHead className="font-bold text-primary">Course</TableHead>
+                  <TableHead className="font-bold text-primary">Credits</TableHead>
+                  <TableHead className="text-right font-bold text-primary">Grade</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -67,9 +67,9 @@ export default function DashboardPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Course</TableHead>
-                  <TableHead>Credits</TableHead>
-                  <TableHead>Status</TableHead>
+                  <TableHead className="font-bold text-primary">Course</TableHead>
+                  <TableHead className="font-bold text-primary">Credits</TableHead>
+                  <TableHead className="font-bold text-primary">Status</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
