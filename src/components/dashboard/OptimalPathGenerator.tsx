@@ -84,7 +84,9 @@ export default function OptimalPathGenerator() {
       <Card className="lg:col-span-1">
         <CardHeader>
           <CardTitle>Generate Optimal Path</CardTitle>
-          <CardDescription>Let AI craft the most efficient path to your graduation. Fill in your details below.</CardDescription>
+          <CardDescription>
+            Let AI craft the most efficient path to your graduation. Fill in your details below.
+          </CardDescription>
         </CardHeader>
         <CardContent className="p-0">
           <Form {...form}>
@@ -170,16 +172,14 @@ export default function OptimalPathGenerator() {
                   )}
                 />
               </div>
-
-              <div className="px-6">
+              
+              <div className="bg-muted -mx-6 px-6 py-4">
                 <FormField
                   control={form.control}
                   name="desiredGraduationTimeline"
                   render={({ field }) => (
                     <FormItem>
-                      <div className="bg-muted -mx-6 px-6 py-4">
                          <FormLabel className="text-lg text-muted-foreground w-full">Desired Graduation Timeline</FormLabel>
-                      </div>
                       <div className="pt-4">
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
@@ -200,15 +200,13 @@ export default function OptimalPathGenerator() {
                 />
               </div>
 
-              <div className="px-6">
+              <div className="bg-muted -mx-6 px-6 py-4">
                 <FormField
                   control={form.control}
                   name="studentProfile"
                   render={({ field }) => (
                     <FormItem>
-                      <div className="bg-muted -mx-6 px-6 py-4">
                         <FormLabel className="text-lg text-muted-foreground w-full">Student Profile (Optional)</FormLabel>
-                      </div>
                       <div className="pt-4">
                         <FormControl>
                           <Textarea placeholder="Tell us about your interests, strengths, etc." className="resize-none" {...field} />
