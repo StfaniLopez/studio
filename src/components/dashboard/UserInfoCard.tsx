@@ -20,17 +20,17 @@ export default function UserInfoCard() {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">Major</p>
-              <Badge variant="default" className="bg-primary text-primary-foreground text-base py-2 px-4 whitespace-nowrap">{user.major}</Badge>
+            <div className="bg-primary/10 p-4 rounded-lg text-center">
+              <p className="text-base font-bold text-primary mb-1">Major</p>
+              <Badge variant="secondary" className="text-sm py-1 px-3 whitespace-nowrap">{user.major}</Badge>
             </div>
-            <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">Term</p>
-              <Badge variant="default" className="bg-primary text-primary-foreground text-base py-2 px-4">{user.currentTerm}</Badge>
+            <div className="bg-primary/10 p-4 rounded-lg text-center">
+              <p className="text-base font-bold text-primary mb-1">Term</p>
+              <Badge variant="secondary" className="text-sm py-1 px-3">{user.currentTerm}</Badge>
             </div>
-            <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">GPA</p>
-              <p className="font-bold text-2xl">{user.gpa.toFixed(2)}</p>
+            <div className="bg-primary/10 p-4 rounded-lg text-center">
+              <p className="text-base font-bold text-primary mb-1">GPA</p>
+              <p className="font-semibold text-xl text-foreground">{user.gpa.toFixed(2)}</p>
             </div>
         </div>
       </CardHeader>
