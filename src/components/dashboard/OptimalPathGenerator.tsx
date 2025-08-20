@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Bot, Loader2, Send, Sparkles, CheckCircle, Lightbulb, BookOpen } from 'lucide-react';
+import { Bot, Loader2, Send, Sparkles, CheckCircle, Lightbulb, BookOpen, Info } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from '@/components/ui/form';
@@ -16,6 +16,7 @@ import { Checkbox } from '../ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { pendingCourses, completedCourses } from '@/lib/data';
 import { Separator } from '../ui/separator';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 
 const formSchema = z.object({
   completedCourses: z.string().min(1, 'Please list completed courses.'),
@@ -78,10 +79,19 @@ export default function OptimalPathGenerator() {
     <div className="grid gap-6 lg:grid-cols-3">
       <Card className="lg:col-span-1">
         <CardHeader>
-          <CardTitle>Generate Optimal Path</CardTitle>
-          <CardDescription>
-            Let AI craft the most efficient path to your graduation. Fill in your details below.
-          </CardDescription>
+          <div className="flex items-center gap-3">
+            <CardTitle>Generate Optimal Path</CardTitle>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Info className="h-4 w-4 text-muted-foreground cursor-pointer" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Let AI craft the most efficient path to your graduation. Fill in your details below.</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
         </CardHeader>
         <CardContent>
           <Form {...form}>
