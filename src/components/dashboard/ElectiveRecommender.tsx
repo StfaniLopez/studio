@@ -72,7 +72,7 @@ export default function ElectiveRecommender() {
                 name="academicHistory"
                 render={({ field }) => (
                   <FormItem className="space-y-4">
-                    <div className="bg-muted px-6 py-3">
+                    <div className="bg-muted -mx-6 px-6 py-3">
                       <FormLabel className="w-full font-semibold text-foreground">Academic History</FormLabel>
                     </div>
                     <div className="px-6">
@@ -90,7 +90,7 @@ export default function ElectiveRecommender() {
                 name="interests"
                 render={({ field }) => (
                   <FormItem className="space-y-4">
-                    <div className="bg-muted px-6 py-3">
+                    <div className="bg-muted -mx-6 px-6 py-3">
                         <FormLabel className="w-full font-semibold text-foreground">Interests & Hobbies</FormLabel>
                     </div>
                     <div className="px-6">
@@ -108,7 +108,7 @@ export default function ElectiveRecommender() {
                 name="careerGoals"
                 render={({ field }) => (
                   <FormItem className="space-y-4">
-                    <div className="bg-muted px-6 py-3">
+                    <div className="bg-muted -mx-6 px-6 py-3">
                         <FormLabel className="w-full font-semibold text-foreground">Career Goals</FormLabel>
                     </div>
                     <div className="px-6">
