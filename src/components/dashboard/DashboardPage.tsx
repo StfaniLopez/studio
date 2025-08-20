@@ -44,8 +44,7 @@ export default function DashboardPage() {
                 {completedCourses.map((course) => (
                   <TableRow key={course.code}>
                     <TableCell>
-                      <div className="font-medium">{course.name}</div>
-                      <div className="text-xs text-muted-foreground">{course.code}</div>
+                      <div className="font-medium">{course.name} ({course.code})</div>
                     </TableCell>
                     <TableCell>{course.credits}</TableCell>
                     <TableCell className="text-right">
@@ -101,8 +100,7 @@ export default function DashboardPage() {
                   return (
                     <TableRow key={course.code}>
                       <TableCell>
-                        <div className="font-medium">{course.name}</div>
-                        <div className="text-xs text-muted-foreground">{course.code}</div>
+                        <div className="font-medium">{course.name} ({course.code})</div>
                       </TableCell>
                       <TableCell>{course.credits}</TableCell>
                       <TableCell>
