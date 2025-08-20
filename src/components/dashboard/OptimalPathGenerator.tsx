@@ -89,23 +89,25 @@ export default function OptimalPathGenerator() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="item-1">
-                  <AccordionTrigger>
-                    <FormLabel className="text-lg">Completed Courses</FormLabel>
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div className="space-y-2 pt-2">
-                      {completedCourses.map(course => (
-                          <div key={course.code} className="flex items-center gap-2">
-                              <CheckCircle className="h-4 w-4 text-green-500" />
-                              <span className="text-sm text-muted-foreground">{course.name} ({course.code})</span>
-                          </div>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+              <FormItem>
+                 <Accordion type="single" collapsible className="w-full">
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger className="hover:no-underline">
+                      <FormLabel className="text-lg p-2 rounded-md bg-secondary text-secondary-foreground inline-block">Completed Courses</FormLabel>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <div className="space-y-2 pt-2">
+                        {completedCourses.map(course => (
+                            <div key={course.code} className="flex items-center gap-2">
+                                <CheckCircle className="h-4 w-4 text-green-500" />
+                                <span className="text-sm text-muted-foreground">{course.name} ({course.code})</span>
+                            </div>
+                        ))}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </FormItem>
 
 
               <FormField
@@ -114,7 +116,7 @@ export default function OptimalPathGenerator() {
                 render={({ field }) => (
                   <FormItem>
                     <div className="mb-4 flex items-center gap-2">
-                      <FormLabel className="text-lg">Remaining Requirements</FormLabel>
+                      <FormLabel className="text-lg p-2 rounded-md bg-secondary text-secondary-foreground inline-block">Remaining Requirements</FormLabel>
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
@@ -171,7 +173,7 @@ export default function OptimalPathGenerator() {
                 name="desiredGraduationTimeline"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg">Desired Graduation Timeline</FormLabel>
+                    <FormLabel className="text-lg p-2 rounded-md bg-secondary text-secondary-foreground inline-block">Desired Graduation Timeline</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                             <SelectTrigger>
@@ -194,7 +196,7 @@ export default function OptimalPathGenerator() {
                 name="studentProfile"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg">Student Profile (Optional)</FormLabel>
+                    <FormLabel className="text-lg p-2 rounded-md bg-secondary text-secondary-foreground inline-block">Student Profile (Optional)</FormLabel>
                     <FormControl>
                       <Textarea placeholder="Tell us about your interests, strengths, etc." className="resize-none" {...field} />
                     </FormControl>
