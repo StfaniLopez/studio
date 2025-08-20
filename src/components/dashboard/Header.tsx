@@ -22,7 +22,9 @@ export default function Header() {
     <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 z-50">
        <Link href="/" className="flex items-center gap-2 text-lg font-semibold md:text-base">
         <GraduationCap className="h-8 w-8 text-primary" />
-        <h1 className="text-xl font-bold">GradPath-AI Planner</h1>
+        <h1 className="text-xl font-bold">
+          GradPath - <span className="text-primary">LEAD University</span>
+        </h1>
       </Link>
 
      <div className="ml-auto flex items-center gap-4">

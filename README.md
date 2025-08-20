@@ -1,7 +1,6 @@
-# GradPath-AI Planner
-New UniGrad-AI
+# GradPath - LEAD University
 
-GradPath-AI Planner is an intelligent, AI-powered university graduation planner designed to help students navigate their academic journey. It provides personalized recommendations, optimal course paths, and graduation predictions to ensure students stay on track and achieve their academic goals efficiently.
+GradPath is an intelligent, AI-powered university graduation planner designed to help students at LEAD University navigate their academic journey. It provides personalized recommendations, optimal course paths, and graduation predictions to ensure students stay on track and achieve their academic goals efficiently.
 
 ## Features
 
@@ -63,4 +62,3 @@ npm run dev
 ```
 
 The application will be available at [http://localhost:9002](http://localhost:9002).
-

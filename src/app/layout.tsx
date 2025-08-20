@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from '@/context/AuthContext';
 
 export const metadata: Metadata = {
-  title: 'GradPath-AI Planner',
+  title: 'GradPath - LEAD University',
   description: 'Your AI-powered university graduation planner',
 };
 
