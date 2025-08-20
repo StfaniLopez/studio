@@ -88,99 +88,103 @@ export default function OptimalPathGenerator() {
             Let AI craft the most efficient path to your graduation. Fill in your details below.
           </CardDescription>
         </CardHeader>
-        <CardContent className="p-0">
+        <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <div className="bg-muted -mx-6 px-6 py-4">
-                 <Accordion type="single" collapsible className="w-full">
-                  <AccordionItem value="item-1" className="border-b-0">
-                    <AccordionTrigger className="hover:no-underline p-0">
-                      <FormLabel className="text-lg text-muted-foreground w-full text-left">Completed Courses</FormLabel>
-                    </AccordionTrigger>
-                    <AccordionContent className="bg-card p-4 rounded-md mt-2">
-                      <div className="space-y-2 pt-2">
-                        {completedCourses.map(course => (
-                            <div key={course.code} className="flex items-center gap-2">
-                                <CheckCircle className="h-4 w-4 text-green-500" />
-                                <span className="text-sm text-muted-foreground">{course.name} ({course.code})</span>
-                            </div>
-                        ))}
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </div>
-
-              <div className="px-6">
-                <FormField
-                  control={form.control}
-                  name="remainingRequirements"
-                  render={({ field }) => (
-                    <FormItem>
-                      <div className="bg-muted -mx-6 px-6 py-4 mb-4">
-                        <div className="flex items-center gap-2">
-                          <FormLabel className="text-lg text-muted-foreground w-full">Remaining Requirements</FormLabel>
+              <div className="space-y-4">
+                <div className="bg-muted -mx-6 px-6 py-2">
+                    <Accordion type="single" collapsible className="w-full">
+                      <AccordionItem value="item-1" className="border-b-0">
+                        <AccordionTrigger className="hover:no-underline p-0 text-lg text-muted-foreground">
+                          Completed Courses
+                        </AccordionTrigger>
+                        <AccordionContent className="bg-card p-4 rounded-md mt-2">
+                          <div className="space-y-2 pt-2">
+                            {completedCourses.map(course => (
+                                <div key={course.code} className="flex items-center gap-2">
+                                    <CheckCircle className="h-4 w-4 text-green-500" />
+                                    <span className="text-sm text-muted-foreground">{course.name} ({course.code})</span>
+                                </div>
+                            ))}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                </div>
+                
+                <div className="space-y-4">
+                    <div className="bg-muted -mx-6 px-6 py-3">
+                      <div className="flex items-center justify-between">
+                         <FormLabel className="text-lg text-muted-foreground">Remaining Requirements</FormLabel>
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
                                 <Info className="h-4 w-4 text-muted-foreground cursor-pointer" />
                               </TooltipTrigger>
                               <TooltipContent>
-                                <p>Select the courses you plan to take.</p>
+                                <p>Select the courses you still need to complete.</p>
                               </TooltipContent>
                             </Tooltip>
                           </TooltipProvider>
                         </div>
-                      </div>
-                      <div className="space-y-4">
-                        {pendingCourses.map((course) => (
-                          <FormField
-                            key={course.code}
-                            control={form.control}
-                            name="remainingRequirements"
-                            render={({ field }) => {
-                              return (
-                                <FormItem
-                                  key={course.code}
-                                  className="flex flex-row items-start space-x-3 space-y-0"
-                                >
-                                  <FormControl>
-                                    <Checkbox
-                                      checked={field.value?.includes(course.code)}
-                                      onCheckedChange={(checked) => {
-                                        return checked
-                                          ? field.onChange([...field.value, course.code])
-                                          : field.onChange(
-                                              field.value?.filter(
-                                                (value) => value !== course.code
-                                              )
-                                            );
-                                      }}
-                                    />
-                                  </FormControl>
-                                  <FormLabel className="font-normal leading-relaxed">
-                                    {course.name} ({course.code})
-                                  </FormLabel>
-                                </FormItem>
-                              );
-                            }}
-                          />
-                        ))}
-                      </div>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              
-              <div className="bg-muted -mx-6 px-6 py-4">
+                    </div>
+                    <div className="px-6">
+                        <FormField
+                        control={form.control}
+                        name="remainingRequirements"
+                        render={({ field }) => (
+                            <FormItem>
+                            <div className="space-y-4">
+                                {pendingCourses.map((course) => (
+                                <FormField
+                                    key={course.code}
+                                    control={form.control}
+                                    name="remainingRequirements"
+                                    render={({ field }) => {
+                                    return (
+                                        <FormItem
+                                        key={course.code}
+                                        className="flex flex-row items-start space-x-3 space-y-0"
+                                        >
+                                        <FormControl>
+                                            <Checkbox
+                                            checked={field.value?.includes(course.code)}
+                                            onCheckedChange={(checked) => {
+                                                return checked
+                                                ? field.onChange([...field.value, course.code])
+                                                : field.onChange(
+                                                    field.value?.filter(
+                                                        (value) => value !== course.code
+                                                    )
+                                                    );
+                                            }}
+                                            />
+                                        </FormControl>
+                                        <FormLabel className="font-normal leading-relaxed">
+                                            {course.name} ({course.code})
+                                        </FormLabel>
+                                        </FormItem>
+                                    );
+                                    }}
+                                />
+                                ))}
+                            </div>
+                            <FormMessage />
+                            </FormItem>
+                        )}
+                        />
+                    </div>
+                </div>
+
                 <FormField
                   control={form.control}
                   name="desiredGraduationTimeline"
                   render={({ field }) => (
                     <FormItem>
-                         <FormLabel className="text-lg text-muted-foreground w-full">Desired Graduation Timeline</FormLabel>
-                      <div className="pt-4">
+                      <div className="bg-muted -mx-6 px-6 py-3">
+                        <FormLabel className="text-lg text-muted-foreground">Desired Graduation Timeline</FormLabel>
+                      </div>
+                      <div className="px-6 pt-4">
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                                 <SelectTrigger>
@@ -198,23 +202,23 @@ export default function OptimalPathGenerator() {
                     </FormItem>
                   )}
                 />
-              </div>
 
-              <div className="bg-muted -mx-6 px-6 py-4">
                 <FormField
                   control={form.control}
                   name="studentProfile"
                   render={({ field }) => (
                     <FormItem>
-                        <FormLabel className="text-lg text-muted-foreground w-full">Student Profile (Optional)</FormLabel>
-                      <div className="pt-4">
-                        <FormControl>
-                          <Textarea placeholder="Tell us about your interests, strengths, etc." className="resize-none" {...field} />
-                        </FormControl>
-                        <FormDescription>
-                            Provide a brief summary of your academic interests, strengths, or career goals to get better elective recommendations.
+                        <div className="bg-muted -mx-6 px-6 py-3">
+                          <FormLabel className="text-lg text-muted-foreground">Student Profile (Optional)</FormLabel>
+                        </div>
+                        <div className="px-6 pt-4">
+                          <FormControl>
+                            <Textarea placeholder="Tell us about your interests, strengths, etc." className="resize-none" {...field} />
+                          </FormControl>
+                          <FormDescription>
+                              Provide a brief summary of your academic interests, strengths, or career goals to get better elective recommendations.
                           </FormDescription>
-                      </div>
+                        </div>
                       <FormMessage />
                     </FormItem>
                   )}

@@ -64,62 +64,62 @@ export default function ElectiveRecommender() {
             Discover electives tailored to your profile, interests, and career ambitions.
           </CardDescription>
         </CardHeader>
-        <CardContent className="p-0">
+        <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <div className="bg-muted -mx-6 px-6 py-4">
-                <FormField
-                  control={form.control}
-                  name="academicHistory"
-                  render={({ field }) => (
-                    <FormItem>
+              <FormField
+                control={form.control}
+                name="academicHistory"
+                render={({ field }) => (
+                  <FormItem className="space-y-4">
+                    <div className="bg-muted -mx-6 px-6 py-3">
                       <FormLabel className="text-lg text-muted-foreground w-full">Academic History</FormLabel>
-                      <div className="pt-4">
-                        <FormControl>
-                          <Textarea placeholder="e.g., Courses taken, grades, strengths..." className="resize-none bg-card" {...field} rows={4} />
-                        </FormControl>
-                      </div>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+                    </div>
+                    <div className="px-6">
+                      <FormControl>
+                        <Textarea placeholder="e.g., Courses taken, grades, strengths..." className="resize-none bg-card" {...field} rows={4} />
+                      </FormControl>
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-              <div className="bg-muted -mx-6 px-6 py-4">
-                <FormField
-                  control={form.control}
-                  name="interests"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-lg text-muted-foreground w-full">Interests & Hobbies</FormLabel>
-                      <div className="pt-4">
-                        <FormControl>
-                          <Textarea placeholder="e.g., Hackathons, painting, chess..." className="resize-none bg-card" {...field} rows={4} />
-                        </FormControl>
-                      </div>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+              <FormField
+                control={form.control}
+                name="interests"
+                render={({ field }) => (
+                  <FormItem className="space-y-4">
+                    <div className="bg-muted -mx-6 px-6 py-3">
+                        <FormLabel className="text-lg text-muted-foreground w-full">Interests & Hobbies</FormLabel>
+                    </div>
+                    <div className="px-6">
+                      <FormControl>
+                        <Textarea placeholder="e.g., Hackathons, painting, chess..." className="resize-none bg-card" {...field} rows={4} />
+                      </FormControl>
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-              <div className="bg-muted -mx-6 px-6 py-4">
-                <FormField
-                  control={form.control}
-                  name="careerGoals"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-lg text-muted-foreground w-full">Career Goals</FormLabel>
-                      <div className="pt-4">
-                        <FormControl>
-                          <Textarea placeholder="e.g., Software Engineer, UX Designer..." className="resize-none bg-card" {...field} rows={4} />
-                        </FormControl>
-                      </div>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+              <FormField
+                control={form.control}
+                name="careerGoals"
+                render={({ field }) => (
+                  <FormItem className="space-y-4">
+                    <div className="bg-muted -mx-6 px-6 py-3">
+                        <FormLabel className="text-lg text-muted-foreground w-full">Career Goals</FormLabel>
+                    </div>
+                    <div className="px-6">
+                      <FormControl>
+                        <Textarea placeholder="e.g., Software Engineer, UX Designer..." className="resize-none bg-card" {...field} rows={4} />
+                      </FormControl>
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
               <div className="px-6 pb-6 pt-4">
                 <Button type="submit" disabled={loading} className="w-full">
