@@ -84,11 +84,11 @@ export default function DashboardPage() {
                       <TableCell>{course.credits}</TableCell>
                       <TableCell>
                         {isInProgress ? (
-                           <Badge variant="default" className="bg-accent text-accent-foreground">
+                           <Badge variant="default" className="bg-amber-500 text-white hover:bg-amber-600">
                             In Progress
                           </Badge>
                         ) : (
-                          <Badge variant="secondary">
+                          <Badge variant="secondary" className="bg-gray-200 text-gray-800 hover:bg-gray-300">
                             Pending
                           </Badge>
                         )}
