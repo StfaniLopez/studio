@@ -20,7 +20,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b bg-card">
-      <div className="flex h-16 items-center px-4 md:px-6">
+      <div className="flex h-16 items-center px-6 md:px-8">
         <Link href="/" className="flex items-center gap-2 text-lg font-semibold md:text-base">
           <GraduationCap className="h-8 w-8 text-primary" />
           <h1 className="text-xl font-bold">
