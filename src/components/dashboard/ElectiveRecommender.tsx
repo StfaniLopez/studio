@@ -64,52 +64,69 @@ export default function ElectiveRecommender() {
             Discover electives tailored to your profile, interests, and career ambitions.
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-0">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="academicHistory"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-lg p-2 rounded-md bg-muted text-muted-foreground">Academic History</FormLabel>
-                    <FormControl>
-                      <Textarea placeholder="e.g., Courses taken, grades, strengths..." className="resize-none" {...field} rows={4} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="interests"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-lg p-2 rounded-md bg-muted text-muted-foreground">Interests & Hobbies</FormLabel>
-                    <FormControl>
-                      <Textarea placeholder="e.g., Hackathons, painting, chess..." className="resize-none" {...field} rows={4} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="careerGoals"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-lg p-2 rounded-md bg-muted text-muted-foreground">Career Goals</FormLabel>
-                    <FormControl>
-                      <Textarea placeholder="e.g., Software Engineer, UX Designer..." className="resize-none" {...field} rows={4} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" disabled={loading} className="w-full">
-                {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />}
-                Get Recommendations
-              </Button>
+              <div className="bg-muted -mx-6 px-6 py-4">
+                <FormField
+                  control={form.control}
+                  name="academicHistory"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-lg text-muted-foreground w-full">Academic History</FormLabel>
+                      <div className="pt-4">
+                        <FormControl>
+                          <Textarea placeholder="e.g., Courses taken, grades, strengths..." className="resize-none bg-card" {...field} rows={4} />
+                        </FormControl>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="bg-muted -mx-6 px-6 py-4">
+                <FormField
+                  control={form.control}
+                  name="interests"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-lg text-muted-foreground w-full">Interests & Hobbies</FormLabel>
+                      <div className="pt-4">
+                        <FormControl>
+                          <Textarea placeholder="e.g., Hackathons, painting, chess..." className="resize-none bg-card" {...field} rows={4} />
+                        </FormControl>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="bg-muted -mx-6 px-6 py-4">
+                <FormField
+                  control={form.control}
+                  name="careerGoals"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-lg text-muted-foreground w-full">Career Goals</FormLabel>
+                      <div className="pt-4">
+                        <FormControl>
+                          <Textarea placeholder="e.g., Software Engineer, UX Designer..." className="resize-none bg-card" {...field} rows={4} />
+                        </FormControl>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="px-6 pb-6 pt-4">
+                <Button type="submit" disabled={loading} className="w-full">
+                  {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />}
+                  Get Recommendations
+                </Button>
+              </div>
             </form>
           </Form>
         </CardContent>
