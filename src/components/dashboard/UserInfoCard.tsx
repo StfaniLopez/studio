@@ -30,7 +30,7 @@ export default function UserInfoCard() {
             </div>
             <div className="bg-primary/10 p-4 rounded-lg text-center">
               <p className="text-base font-bold text-primary mb-1">GPA</p>
-              <p className="font-semibold text-xl text-foreground">{user.gpa.toFixed(2)}</p>
+              <Badge variant="secondary" className="text-sm py-1 px-3">{user.gpa.toFixed(2)}</Badge>
             </div>
         </div>
       </CardHeader>
