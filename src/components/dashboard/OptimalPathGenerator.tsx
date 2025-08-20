@@ -127,7 +127,7 @@ export default function OptimalPathGenerator() {
                         Select the courses you plan to take.
                       </FormDescription>
                     </div>
-                    <div className="space-y-3">
+                    <div className="space-y-4">
                       {pendingCourses.map((course) => (
                         <FormField
                           key={course.code}
