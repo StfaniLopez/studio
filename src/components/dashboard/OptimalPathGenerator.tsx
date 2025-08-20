@@ -92,10 +92,10 @@ export default function OptimalPathGenerator() {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <div className="space-y-4">
-                <div className="bg-muted -mx-6 px-6 py-2">
+                 <div className="bg-muted px-6 py-2">
                     <Accordion type="single" collapsible className="w-full">
                       <AccordionItem value="item-1" className="border-b-0">
-                        <AccordionTrigger className="hover:no-underline p-0 text-lg text-muted-foreground">
+                        <AccordionTrigger className="hover:no-underline p-0 font-semibold text-foreground">
                           Completed Courses
                         </AccordionTrigger>
                         <AccordionContent className="bg-card p-4 rounded-md mt-2">
@@ -113,9 +113,9 @@ export default function OptimalPathGenerator() {
                 </div>
                 
                 <div className="space-y-4">
-                    <div className="bg-muted -mx-6 px-6 py-3">
+                    <div className="bg-muted px-6 py-3">
                       <div className="flex items-center justify-between">
-                         <FormLabel className="text-lg text-muted-foreground">Remaining Requirements</FormLabel>
+                         <FormLabel className="font-semibold text-foreground">Remaining Requirements</FormLabel>
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
@@ -181,8 +181,8 @@ export default function OptimalPathGenerator() {
                   name="desiredGraduationTimeline"
                   render={({ field }) => (
                     <FormItem>
-                      <div className="bg-muted -mx-6 px-6 py-3">
-                        <FormLabel className="text-lg text-muted-foreground">Desired Graduation Timeline</FormLabel>
+                      <div className="bg-muted px-6 py-3">
+                        <FormLabel className="font-semibold text-foreground">Desired Graduation Timeline</FormLabel>
                       </div>
                       <div className="px-6 pt-4">
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -208,8 +208,8 @@ export default function OptimalPathGenerator() {
                   name="studentProfile"
                   render={({ field }) => (
                     <FormItem>
-                        <div className="bg-muted -mx-6 px-6 py-3">
-                          <FormLabel className="text-lg text-muted-foreground">Student Profile (Optional)</FormLabel>
+                        <div className="bg-muted px-6 py-3">
+                          <FormLabel className="font-semibold text-foreground">Student Profile (Optional)</FormLabel>
                         </div>
                         <div className="px-6 pt-4">
                           <FormControl>
