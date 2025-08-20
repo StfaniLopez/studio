@@ -23,9 +23,9 @@ export default function DashboardPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="font-bold text-primary">Course</TableHead>
-                  <TableHead className="font-bold text-primary">Credits</TableHead>
-                  <TableHead className="text-right font-bold text-primary">Grade</TableHead>
+                  <TableHead className="font-bold text-primary text-base">Course</TableHead>
+                  <TableHead className="font-bold text-primary text-base">Credits</TableHead>
+                  <TableHead className="text-right font-bold text-primary text-base">Grade</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -67,9 +67,9 @@ export default function DashboardPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="font-bold text-primary">Course</TableHead>
-                  <TableHead className="font-bold text-primary">Credits</TableHead>
-                  <TableHead className="font-bold text-primary">Status</TableHead>
+                  <TableHead className="font-bold text-primary text-base">Course</TableHead>
+                  <TableHead className="font-bold text-primary text-base">Credits</TableHead>
+                  <TableHead className="font-bold text-primary text-base">Status</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -88,7 +88,7 @@ export default function DashboardPage() {
                             In Progress
                           </Badge>
                         ) : (
-                          <Badge variant="secondary">
+                          <Badge variant="secondary" className="bg-gray-400 text-white hover:bg-gray-500">
                             Pending
                           </Badge>
                         )}
