@@ -94,7 +94,7 @@ export default function OptimalPathGenerator() {
               <div className="bg-muted -mx-6 px-6 py-3">
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="item-1" className="border-b-0">
-                    <AccordionTrigger className="hover:no-underline p-0 font-semibold text-foreground text-sm">
+                    <AccordionTrigger className="hover:no-underline p-0 font-semibold text-foreground text-base">
                       Completed Courses
                     </AccordionTrigger>
                     <AccordionContent className="bg-card -mx-6 px-6 pt-4 rounded-none font-normal">
@@ -118,7 +118,7 @@ export default function OptimalPathGenerator() {
                   <FormItem>
                     <div className="bg-muted -mx-6 px-6 py-3">
                       <div className="flex items-center justify-between font-semibold text-foreground">
-                         <FormLabel className="font-semibold text-foreground">Remaining Requirements</FormLabel>
+                         <FormLabel className="font-semibold text-foreground text-base">Remaining Requirements</FormLabel>
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
@@ -177,7 +177,7 @@ export default function OptimalPathGenerator() {
                 render={({ field }) => (
                   <FormItem>
                     <div className="bg-muted -mx-6 px-6 py-3">
-                      <FormLabel className="font-semibold text-foreground">Desired Graduation Timeline</FormLabel>
+                      <FormLabel className="font-semibold text-foreground text-base">Desired Graduation Timeline</FormLabel>
                     </div>
                     <div className="pt-4 px-6">
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -204,7 +204,7 @@ export default function OptimalPathGenerator() {
                 render={({ field }) => (
                   <FormItem>
                     <div className="bg-muted -mx-6 px-6 py-3">
-                      <FormLabel className="font-semibold text-foreground">Student Profile (Optional)</FormLabel>
+                      <FormLabel className="font-semibold text-foreground text-base">Student Profile (Optional)</FormLabel>
                     </div>
                     <div className="pt-4 px-6">
                       <FormControl>
