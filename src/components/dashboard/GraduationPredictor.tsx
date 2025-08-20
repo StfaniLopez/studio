@@ -4,83 +4,94 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { BarChart, Loader2, Send, Sparkles } from 'lucide-react';
+import { BarChart, Info, Loader2, Send, Sparkles } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from '@/components/ui/form';
-import { Textarea } from '@/components/ui/textarea';
-import { Input } from '@/components/ui/input';
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
 import { predictGraduationAction } from '@/lib/actions';
 import type { PredictGraduationTimeOutput } from '@/ai/flows/predict-graduation-time';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Separator } from '@/components/ui/separator';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
-// Placeholder for the chart component (replace with a real chart library)
-const GraduationChart = ({ data }: { data: PredictGraduationTimeOutput | null }) => <div>Chart Placeholder</div>;
 const formSchema = z.object({
-  completedCredits: z.coerce.number().min(0, 'Credits must be non-negative.'),
-  // We are removing the input fields, so these are no longer required in the schema
+  // The form now just manages a set of boolean checkboxes.
+  // We can define them here to ensure type safety.
+  includeCompletedCredits: z.boolean().default(true),
+  includeTotalCredits: z.boolean().default(true),
+  includeAverageGpa: z.boolean().default(true),
+  includePlannedCourses: z.boolean().default(true),
+  includeHistoricalData: z.boolean().default(true),
+  showLineChart: z.boolean().default(false), // Optional: for chart visualization
 });
+
+type FormValues = z.infer<typeof formSchema>;
+
+// Define titles, descriptions, and corresponding form field names
+const checkboxOptions: { id: keyof FormValues; title: string; description: string }[] = [
+  { id: 'includeCompletedCredits', title: 'Include Completed Credits', description: 'The number of credits you have completed so far.' },
+  { id: 'includeTotalCredits', title: 'Include Total Credits Required', description: 'The total number of credits required for your degree.' },
+  { id: 'includeAverageGpa', title: 'Include Average GPA', description: 'Your current Grade Point Average (GPA).' },
+  { id: 'includePlannedCourses', title: 'Include Planned Courses', description: 'A list of your planned future courses and their credits.' },
+  { id: 'includeHistoricalData', title: 'Include Historical Data', description: 'A summary of historical graduation trends or data relevant to your situation.' },
+  { id: 'showLineChart', title: 'Show Line Chart', description: 'Visualize the predicted graduation timeline with a line chart.' },
+];
 
 export default function GraduationPredictor() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<PredictGraduationTimeOutput | null>(null);
-  const [showChart, setShowChart] = useState(false);
-  const [selectedCheckboxes, setSelectedCheckboxes] = useState<
-    { title: string; description: string }[]
-  >([]);
-
-  // State for each checkbox
-  const [includeCompletedCredits, setIncludeCompletedCredits] = useState(true);
-  const [includeTotalCredits, setIncludeTotalCredits] = useState(true);
-  const [includeAverageGpa, setIncludeAverageGpa] = useState(true);
-  const [includePlannedCourses, setIncludePlannedCourses] = useState(true);
-  const [includeHistoricalData, setIncludeHistoricalData] = useState(true);
-
-  // Define titles and descriptions for each checkbox
-  const checkboxOptions = [
-  { id: 'completedCredits', title: 'Include Completed Credits', description: 'Include the number of credits you have completed so far.', state: includeCompletedCredits, setState: setIncludeCompletedCredits },
-  { id: 'totalCredits', title: 'Include Total Credits', description: 'Include the total number of credits required for your degree.', state: includeTotalCredits, setState: setIncludeTotalCredits },
-  { id: 'averageGpa', title: 'Include Average GPA', description: 'Include your current average GPA.', state: includeAverageGpa, setState: setIncludeAverageGpa },
-  { id: 'plannedCourses', title: 'Include Planned Courses', description: 'List your planned future courses and their credits.', state: includePlannedCourses, setState: setIncludePlannedCourses },
-  { id: 'historicalData', title: 'Include Historical Data', description: 'Provide a summary of historical graduation trends or data relevant to your situation.', state: includeHistoricalData, setState: setIncludeHistoricalData },
-  { id: 'showLineChart', title: 'Show Line Chart', description: 'Visualize the predicted graduation timeline with a line chart.', state: showChart, setState: setShowChart },
-  ];
-
   const { toast } = useToast();
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      includeCompletedCredits: true,
+      includeTotalCredits: true,
+      includeAverageGpa: true,
+      includePlannedCourses: true,
+      includeHistoricalData: true,
+      showLineChart: false,
+    },
   });
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Instead of predicting, collect and display selected checkbox info
-    const selected = checkboxOptions
-      .filter(option => option.state)
-      .map(option => ({
-        title: option.title,
-        description: option.description,
-      }));
 
-    setSelectedCheckboxes(selected);
-    setResult(null); // Clear previous prediction result
-    setLoading(false); // Ensure loading is false
+  // This function is a placeholder for what would happen on submit.
+  // The actual prediction logic is commented out to focus on the UI.
+  async function onSubmit(values: FormValues) {
+    setLoading(true);
+    setResult(null);
 
-    // The original prediction logic is commented out as per the instruction
-    /*
-    // ... (original prediction logic)
+    // This is where you would normally call the prediction action.
+    // For now, we'll just log the selected values.
+    console.log('Selected options for prediction:', values);
+
+    // Example of how you *would* use this:
+    try {
+      // You would construct the input for your AI action based on the selected checkboxes.
+      // For this example, we'll use placeholder data.
+      const response = await predictGraduationAction({
+          completedCredits: 114, // from data
+          totalCreditsRequired: 143, // from data
+          plannedCourses: "CS450 (3 credits), ENG301 (3 credits)", // constructed based on user data
+          averageGpa: 3.7, // from data
+          historicalGraduationData: "Students in this major typically graduate in 4 to 5 years." // from a service or data
+      });
+
+      if (response) {
+        setResult(response);
+      } else {
+        throw new Error('No response from AI');
+      }
     } catch (error) {
       console.error(error);
       toast({
-        variant: "destructive",
-        title: "Error Predicting Graduation",
-        description: "Could not get a prediction. Please try again.",
+        variant: 'destructive',
+        title: 'Error Predicting Graduation',
+        description: 'Could not get a prediction. Please try again.',
       });
     } finally {
       setLoading(false);
     }
-    */
   }
 
   const getConfidenceBadgeClass = (level: string) => {
@@ -94,7 +105,7 @@ export default function GraduationPredictor() {
       default:
         return 'bg-secondary';
     }
-  }
+  };
 
   return (
     <div className="grid gap-6 lg:grid-cols-3">
@@ -107,34 +118,42 @@ export default function GraduationPredictor() {
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              {/* Checkboxes with Descriptions */}
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <div className="space-y-4">
-                {checkboxOptions.map((option) => (
-                  <FormField
-                    key={option.id}
-                    control={form.control}
-                    name={option.id as keyof z.infer<typeof formSchema>} // Type assertion, as these don't directly map to schema fields anymore
-                    render={() => (
-                      <FormItem className="space-y-2">
-                        <FormLabel htmlFor={option.id}>{option.title}</FormLabel>
-                      <div className="flex items-center space-x-2">
-                        <FormControl>
-                          <Checkbox
-                            checked={option.state}
-                            onCheckedChange={option.setState}
-                            id={option.id}
-                          />
-                        </FormControl>
-                        <p className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Select to include</p>
-                      </div>
-                      <FormDescription>{option.description}</FormDescription>
-                    </FormItem>
-                  )}
-                />
-                ))}
+                <FormLabel>Check the options to include in the prediction:</FormLabel>
+                <TooltipProvider>
+                  {checkboxOptions.map((option) => (
+                    <FormField
+                      key={option.id}
+                      control={form.control}
+                      name={option.id}
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                          <div className="flex items-center space-x-3">
+                            <FormControl>
+                              <Checkbox
+                                checked={field.value}
+                                onCheckedChange={field.onChange}
+                              />
+                            </FormControl>
+                            <FormLabel className="font-normal text-sm">
+                              {option.title}
+                            </FormLabel>
+                          </div>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Info className="h-4 w-4 text-muted-foreground cursor-pointer" />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>{option.description}</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </FormItem>
+                      )}
+                    />
+                  ))}
+                </TooltipProvider>
               </div>
-
 
               <Button type="submit" disabled={loading} className="w-full">
                 {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />}
@@ -146,7 +165,7 @@ export default function GraduationPredictor() {
       </Card>
       
       <div className="lg:col-span-2">
-         {loading && (
+        {loading && (
           <Card className="flex h-full min-h-[500px] items-center justify-center">
             <div className="text-center text-muted-foreground">
               <BarChart className="mx-auto h-12 w-12 animate-pulse" />
@@ -158,58 +177,36 @@ export default function GraduationPredictor() {
         {result && (
           <Card>
             <CardHeader>
-                <CardTitle className="flex items-center gap-2"><Sparkles className="text-primary" /> Graduation Forecast</CardTitle>
+              <CardTitle className="flex items-center gap-2"><Sparkles className="text-primary" /> Graduation Forecast</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
-                <div className="text-center p-6 bg-secondary rounded-lg">
-                    <p className="text-sm text-muted-foreground">Predicted Graduation Time</p>
-                    <p className="text-4xl font-bold text-primary mt-2">{result.predictedGraduationTime}</p>
-                    <div className="mt-4">
-                        <Badge className={getConfidenceBadgeClass(result.confidenceLevel)}>
-                            Confidence: {result.confidenceLevel}
-                        </Badge>
-                    </div>
+              <div className="text-center p-6 bg-secondary/30 rounded-lg">
+                <p className="text-sm text-muted-foreground">Predicted Graduation Time</p>
+                <p className="text-4xl font-bold text-primary mt-2">{result.predictedGraduationTime}</p>
+                <div className="mt-4">
+                  <Badge className={getConfidenceBadgeClass(result.confidenceLevel)}>
+                    Confidence: {result.confidenceLevel}
+                  </Badge>
                 </div>
-                 <div className="border-t pt-6">
-                     <h3 className="font-semibold text-lg mb-2">Reasoning</h3>
-                     <p className="text-sm text-muted-foreground leading-relaxed">{result.reasoning}</p>
-                 </div>
+              </div>
+              <div className="border-t pt-6">
+                <h3 className="font-semibold text-lg mb-2">Reasoning</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{result.reasoning}</p>
+              </div>
             </CardContent>
             <CardFooter>
-                 <p className="text-xs text-muted-foreground">This prediction is based on the data provided and historical trends. It is not a guarantee.</p>
+              <p className="text-xs text-muted-foreground">This prediction is based on the data provided and historical trends. It is not a guarantee.</p>
             </CardFooter>
           </Card>
         )}
-
-        {/* Display Selected Checkbox Info */}
-        {selectedCheckboxes.length > 0 && (
-          <Card className="mt-6">
-            <CardHeader><CardTitle>Selected Options</CardTitle></CardHeader>
-            <CardContent className="space-y-4">
-              {selectedCheckboxes.map((item, index) => (
-                <div key={index}>
-                  <h3 className="font-semibold">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.description}</p>
-                  {index < selectedCheckboxes.length - 1 && <Separator className="my-4" />}
-                </div>
-              ))}
-            </CardContent>
+        {!loading && !result && (
+          <Card className="flex h-full min-h-[500px] items-center justify-center border-dashed">
+            <div className="text-center text-muted-foreground">
+              <BarChart className="mx-auto h-12 w-12" />
+              <p className="mt-4 font-semibold">Look into your future</p>
+              <p className="text-sm">Fill out the form to get a graduation time prediction.</p>
+            </div>
           </Card>
-        )}
-
-        {/* Chart Placeholder */}
-        {!loading && result && showChart && (
-          <GraduationChart data={result} />
-        )}
-
-         {!loading && !result && (
-            <Card className="flex h-full min-h-[500px] items-center justify-center border-dashed">
-                <div className="text-center text-muted-foreground">
-                    <BarChart className="mx-auto h-12 w-12" />
-                    <p className="mt-4 font-semibold">Look into your future</p>
-                    <p className="text-sm">Fill out the form to get a graduation time prediction.</p>
-                </div>
-            </Card>
         )}
       </div>
     </div>
