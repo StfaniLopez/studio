@@ -14,7 +14,7 @@ import { generatePathAction } from '@/lib/actions';
 import type { GenerateOptimalGraduationPathsOutput } from '@/ai/flows/generate-optimal-graduation-paths';
 import { Checkbox } from '../ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { pendingCourses, completedCourses } from '@/lib/data';
+import { pendingCourses, completedCourses, allCourses as allCourseData } from '@/lib/data';
 import { Separator } from '../ui/separator';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
@@ -35,8 +35,7 @@ const timelineOptions = [
 ];
 
 // Create a map for easy course lookup
-const allCourses = [...completedCourses, ...pendingCourses];
-const courseMap = new Map(allCourses.map(course => [course.code, course.name]));
+const courseMap = new Map(allCourseData.map(course => [course.code, course.name]));
 
 export default function OptimalPathGenerator() {
   const [loading, setLoading] = useState(false);

@@ -63,3 +63,12 @@ export const pendingCourses: Course[] = [
   { code: 'BBCC0004', name: 'Comercio digital', credits: 3, prerequisites: [] },
   { code: 'TCNT0015', name: 'Práctica Profesional Supervisada', credits: 14, prerequisites: [] },
 ];
+
+export const allCourses: (Course | CompletedCourse)[] = [
+  ...completedCourses,
+  ...pendingCourses,
+  // Add other potential electives or courses here if they are not in the above lists
+  { code: 'CS240', name: 'Data Abstraction & Problem Solving', credits: 3, prerequisites: []},
+  { code: 'CS300', name: 'Advanced Object-Oriented Design', credits: 3, prerequisites: []},
+  { code: 'MATH202', name: 'Differential Equations', credits: 4, prerequisites: []},
+];
