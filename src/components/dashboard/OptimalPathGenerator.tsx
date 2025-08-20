@@ -91,25 +91,25 @@ export default function OptimalPathGenerator() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="item-1" className="border-b-0">
-                  <div className="bg-muted -mx-6 px-6 py-3">
+              <div className="bg-muted -mx-6 px-6 py-3">
+                <Accordion type="single" collapsible className="w-full">
+                  <AccordionItem value="item-1" className="border-b-0">
                     <AccordionTrigger className="hover:no-underline p-0 font-semibold text-foreground text-base">
-                      Completed Courses
+                        Completed Courses
                     </AccordionTrigger>
-                  </div>
-                  <AccordionContent className="bg-card -mx-6 px-6 pt-4 rounded-none font-normal">
-                    <div className="space-y-2 pt-2">
-                      {completedCourses.map(course => (
-                          <div key={course.code} className="flex items-center gap-2">
-                              <CheckCircle className="h-4 w-4 text-green-500" />
-                              <span className="text-sm text-muted-foreground">{course.name} ({course.code})</span>
-                          </div>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                    <AccordionContent className="bg-card -mx-6 px-6 pt-4 rounded-none font-normal">
+                      <div className="space-y-2 pt-2">
+                        {completedCourses.map(course => (
+                            <div key={course.code} className="flex items-center gap-2">
+                                <CheckCircle className="h-4 w-4 text-green-500" />
+                                <span className="text-sm text-muted-foreground">{course.name} ({course.code})</span>
+                            </div>
+                        ))}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </div>
               
               <FormField
                 control={form.control}
@@ -205,7 +205,7 @@ export default function OptimalPathGenerator() {
                   <FormItem>
                     <div className="bg-muted -mx-6 px-6 py-3">
                        <div className="flex items-center justify-between font-semibold text-foreground">
-                        <FormLabel className="font-semibold text-foreground text-base">Student Profile (Optional)</FormLabel>
+                        <FormLabel className="font-semibold text-foreground text-base">Enter Student Profile (Optional)</FormLabel>
                         <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
