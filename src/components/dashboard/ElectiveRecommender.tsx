@@ -71,11 +71,11 @@ export default function ElectiveRecommender() {
                 control={form.control}
                 name="academicHistory"
                 render={({ field }) => (
-                  <FormItem className="space-y-4">
-                    <div className="bg-muted -mx-6 px-6 py-3">
-                      <FormLabel className="w-full font-semibold text-foreground">Academic History</FormLabel>
+                  <FormItem>
+                    <div className="bg-muted -mx-6 px-6 py-3 font-semibold text-foreground">
+                      <FormLabel>Academic History</FormLabel>
                     </div>
-                    <div className="px-6">
+                    <div className="px-6 pt-4">
                       <FormControl>
                         <Textarea placeholder="e.g., Courses taken, grades, strengths..." className="resize-none bg-card" {...field} rows={4} />
                       </FormControl>
@@ -89,11 +89,11 @@ export default function ElectiveRecommender() {
                 control={form.control}
                 name="interests"
                 render={({ field }) => (
-                  <FormItem className="space-y-4">
-                    <div className="bg-muted -mx-6 px-6 py-3">
-                        <FormLabel className="w-full font-semibold text-foreground">Interests & Hobbies</FormLabel>
+                  <FormItem>
+                    <div className="bg-muted -mx-6 px-6 py-3 font-semibold text-foreground">
+                        <FormLabel>Interests & Hobbies</FormLabel>
                     </div>
-                    <div className="px-6">
+                    <div className="px-6 pt-4">
                       <FormControl>
                         <Textarea placeholder="e.g., Hackathons, painting, chess..." className="resize-none bg-card" {...field} rows={4} />
                       </FormControl>
@@ -107,11 +107,11 @@ export default function ElectiveRecommender() {
                 control={form.control}
                 name="careerGoals"
                 render={({ field }) => (
-                  <FormItem className="space-y-4">
-                    <div className="bg-muted -mx-6 px-6 py-3">
-                        <FormLabel className="w-full font-semibold text-foreground">Career Goals</FormLabel>
+                  <FormItem>
+                    <div className="bg-muted -mx-6 px-6 py-3 font-semibold text-foreground">
+                        <FormLabel>Career Goals</FormLabel>
                     </div>
-                    <div className="px-6">
+                    <div className="px-6 pt-4">
                       <FormControl>
                         <Textarea placeholder="e.g., Software Engineer, UX Designer..." className="resize-none bg-card" {...field} rows={4} />
                       </FormControl>
