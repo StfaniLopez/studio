@@ -204,15 +204,24 @@ export default function OptimalPathGenerator() {
                 render={({ field }) => (
                   <FormItem>
                     <div className="bg-muted -mx-6 px-6 py-3">
-                      <FormLabel className="font-semibold text-foreground text-base">Student Profile (Optional)</FormLabel>
+                       <div className="flex items-center justify-between font-semibold text-foreground">
+                        <FormLabel className="font-semibold text-foreground text-base">Student Profile (Optional)</FormLabel>
+                        <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Info className="h-4 w-4 text-muted-foreground cursor-pointer" />
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Provide a brief summary of your academic interests, strengths, or career goals to get better elective recommendations.</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                       </div>
                     </div>
                     <div className="pt-4 px-6">
                       <FormControl>
                         <Textarea placeholder="Tell us about your interests, strengths, etc." className="resize-none text-xs text-muted-foreground" {...field} />
                       </FormControl>
-                      <FormDescription>
-                          Provide a brief summary of your academic interests, strengths, or career goals to get better elective recommendations.
-                      </FormDescription>
                     </div>
                     <FormMessage className="px-6" />
                   </FormItem>
