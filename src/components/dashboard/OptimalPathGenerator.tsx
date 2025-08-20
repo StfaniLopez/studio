@@ -110,11 +110,18 @@ export default function OptimalPathGenerator() {
                 name="remainingRequirements"
                 render={({ field }) => (
                   <FormItem>
-                    <div className="mb-4">
+                    <div className="mb-4 flex items-center gap-2">
                       <FormLabel className="text-lg">Remaining Requirements</FormLabel>
-                      <FormDescription>
-                        Select the courses you plan to take.
-                      </FormDescription>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Info className="h-4 w-4 text-muted-foreground cursor-pointer" />
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Select the courses you plan to take.</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                     <div className="space-y-4">
                       {pendingCourses.map((course) => (
