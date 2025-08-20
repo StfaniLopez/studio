@@ -1,10 +1,11 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { completedCourses, pendingCourses } from "@/lib/data";
-import { BookOpen, ListChecks } from "lucide-react";
+import { BookOpen, ListChecks, Info } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export default function DashboardPage() {
   return (
@@ -13,11 +14,22 @@ export default function DashboardPage() {
         {/* Completed Courses */}
         <Card>
           <CardHeader>
-            <div className="flex items-center gap-3">
-              <ListChecks className="h-6 w-6 text-primary" />
-              <CardTitle>Completed Courses</CardTitle>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <ListChecks className="h-6 w-6 text-primary" />
+                <CardTitle>Completed Courses</CardTitle>
+              </div>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Info className="h-4 w-4 text-muted-foreground cursor-pointer" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Courses you have successfully passed.</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </div>
-            <CardDescription>Courses you have successfully passed.</CardDescription>
           </CardHeader>
           <CardContent>
             <Table>
@@ -57,11 +69,22 @@ export default function DashboardPage() {
         {/* Pending Courses */}
         <Card>
           <CardHeader>
-            <div className="flex items-center gap-3">
-              <BookOpen className="h-6 w-6 text-primary" />
-              <CardTitle>Pending Courses</CardTitle>
+             <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <BookOpen className="h-6 w-6 text-primary" />
+                  <CardTitle>Pending Courses</CardTitle>
+                </div>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Info className="h-4 w-4 text-muted-foreground cursor-pointer" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Required courses for your degree.</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
             </div>
-            <CardDescription>Required courses for your degree.</CardDescription>
           </CardHeader>
           <CardContent>
             <Table>
@@ -88,7 +111,7 @@ export default function DashboardPage() {
                             In Progress
                           </Badge>
                         ) : (
-                          <Badge variant="secondary" className="bg-muted text-muted-foreground hover:bg-muted/80">
+                          <Badge variant="secondary" className="bg-orange-200 text-gray-600 hover:bg-orange-300">
                             Pending
                           </Badge>
                         )}
