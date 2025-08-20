@@ -17,6 +17,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { pendingCourses, completedCourses } from '@/lib/data';
 import { Separator } from '../ui/separator';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 
 const formSchema = z.object({
   completedCourses: z.string().min(1, 'Please list completed courses.'),
@@ -96,23 +97,24 @@ export default function OptimalPathGenerator() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <FormField
-                control={form.control}
-                name="completedCourses"
-                render={() => (
-                  <FormItem>
+              <Accordion type="single" collapsible className="w-full">
+                <AccordionItem value="item-1">
+                  <AccordionTrigger>
                     <FormLabel className="text-lg">Completed Courses</FormLabel>
+                  </AccordionTrigger>
+                  <AccordionContent>
                     <div className="space-y-2 pt-2">
-                        {completedCourses.map(course => (
-                            <div key={course.code} className="flex items-center gap-2">
-                                <CheckCircle className="h-4 w-4 text-green-500" />
-                                <span className="text-sm text-muted-foreground">{course.name}</span>
-                            </div>
-                        ))}
+                      {completedCourses.map(course => (
+                          <div key={course.code} className="flex items-center gap-2">
+                              <CheckCircle className="h-4 w-4 text-green-500" />
+                              <span className="text-sm text-muted-foreground">{course.name} ({course.code})</span>
+                          </div>
+                      ))}
                     </div>
-                  </FormItem>
-                )}
-              />
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+
 
               <FormField
                 control={form.control}
