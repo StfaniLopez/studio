@@ -97,7 +97,7 @@ export default function OptimalPathGenerator() {
                     <AccordionTrigger className="hover:no-underline p-0 font-semibold text-foreground text-sm">
                       Completed Courses
                     </AccordionTrigger>
-                    <AccordionContent className="bg-card p-4 rounded-md mt-2 font-normal">
+                    <AccordionContent className="bg-card -mx-6 px-6 pt-4 rounded-none font-normal">
                       <div className="space-y-2 pt-2">
                         {completedCourses.map(course => (
                             <div key={course.code} className="flex items-center gap-2">
@@ -118,7 +118,7 @@ export default function OptimalPathGenerator() {
                   <FormItem>
                     <div className="bg-muted -mx-6 px-6 py-3">
                       <div className="flex items-center justify-between font-semibold text-foreground">
-                         <FormLabel>Remaining Requirements</FormLabel>
+                         <FormLabel className="font-semibold text-foreground">Remaining Requirements</FormLabel>
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
@@ -176,8 +176,8 @@ export default function OptimalPathGenerator() {
                 name="desiredGraduationTimeline"
                 render={({ field }) => (
                   <FormItem>
-                    <div className="bg-muted -mx-6 px-6 py-3 font-semibold text-foreground">
-                      <FormLabel>Desired Graduation Timeline</FormLabel>
+                    <div className="bg-muted -mx-6 px-6 py-3">
+                      <FormLabel className="font-semibold text-foreground">Desired Graduation Timeline</FormLabel>
                     </div>
                     <div className="pt-4 px-6">
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -203,8 +203,8 @@ export default function OptimalPathGenerator() {
                 name="studentProfile"
                 render={({ field }) => (
                   <FormItem>
-                    <div className="bg-muted -mx-6 px-6 py-3 font-semibold text-foreground">
-                      <FormLabel>Student Profile (Optional)</FormLabel>
+                    <div className="bg-muted -mx-6 px-6 py-3">
+                      <FormLabel className="font-semibold text-foreground">Student Profile (Optional)</FormLabel>
                     </div>
                     <div className="pt-4 px-6">
                       <FormControl>
