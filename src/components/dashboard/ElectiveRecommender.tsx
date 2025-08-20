@@ -73,7 +73,7 @@ export default function ElectiveRecommender() {
                 render={({ field }) => (
                   <FormItem>
                     <div className="bg-muted -mx-6 px-6 py-3">
-                      <FormLabel className="font-semibold text-foreground text-base">Academic History</FormLabel>
+                      <FormLabel className="font-semibold text-foreground text-base">Enter Academic History</FormLabel>
                     </div>
                     <div className="px-6 pt-4">
                       <FormControl>
@@ -91,7 +91,7 @@ export default function ElectiveRecommender() {
                 render={({ field }) => (
                   <FormItem>
                     <div className="bg-muted -mx-6 px-6 py-3">
-                        <FormLabel className="font-semibold text-foreground text-base">Interests & Hobbies</FormLabel>
+                        <FormLabel className="font-semibold text-foreground text-base">Enter Interests & Hobbies</FormLabel>
                     </div>
                     <div className="px-6 pt-4">
                       <FormControl>
@@ -109,7 +109,7 @@ export default function ElectiveRecommender() {
                 render={({ field }) => (
                   <FormItem>
                     <div className="bg-muted -mx-6 px-6 py-3">
-                        <FormLabel className="font-semibold text-foreground text-base">Career Goals</FormLabel>
+                        <FormLabel className="font-semibold text-foreground text-base">Enter Career Goals</FormLabel>
                     </div>
                     <div className="px-6 pt-4">
                       <FormControl>
