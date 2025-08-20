@@ -88,7 +88,7 @@ export default function DashboardPage() {
                             In Progress
                           </Badge>
                         ) : (
-                          <Badge variant="default" className="bg-primary text-primary-foreground">
+                          <Badge variant="secondary">
                             Pending
                           </Badge>
                         )}
