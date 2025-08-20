@@ -88,7 +88,7 @@ export default function DashboardPage() {
                             In Progress
                           </Badge>
                         ) : (
-                          <Badge variant="secondary" className="bg-orange-300 text-orange-800 hover:bg-orange-400">
+                          <Badge variant="secondary" className="bg-muted text-muted-foreground hover:bg-muted/80">
                             Pending
                           </Badge>
                         )}
