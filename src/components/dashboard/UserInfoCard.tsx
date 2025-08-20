@@ -2,6 +2,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { user } from "@/lib/data";
+import { Badge } from "../ui/badge";
 
 export default function UserInfoCard() {
   const progressValue = (user.completedCredits / user.totalCredits) * 100;
@@ -9,29 +10,31 @@ export default function UserInfoCard() {
   return (
     <Card>
       <CardHeader className="grid grid-cols-1 md:grid-cols-[auto_1fr] items-center gap-6 p-6">
-        <Avatar className="h-24 w-24 text-3xl font-bold">
-          <AvatarFallback className="bg-secondary text-secondary-foreground">{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-        </Avatar>
-        <div className="grid gap-1">
-            <CardTitle className="text-2xl font-bold">{user.name}</CardTitle>
-            <CardDescription className="text-base text-muted-foreground">{user.email}</CardDescription>
+        <div className="flex items-center gap-6">
+          <Avatar className="h-24 w-24 text-3xl font-bold">
+            <AvatarFallback className="bg-secondary text-secondary-foreground">{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+          </Avatar>
+          <div className="grid gap-1">
+              <CardTitle className="text-2xl font-bold">{user.name}</CardTitle>
+              <CardDescription className="text-base text-muted-foreground">{user.email}</CardDescription>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground mb-1">Major</p>
+              <Badge variant="default" className="bg-primary text-primary-foreground text-base py-2 px-4 whitespace-nowrap">{user.major}</Badge>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-muted-foreground mb-1">Term</p>
+              <Badge variant="default" className="bg-primary text-primary-foreground text-base py-2 px-4">{user.currentTerm}</Badge>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-muted-foreground mb-1">GPA</p>
+              <p className="font-bold text-2xl">{user.gpa.toFixed(2)}</p>
+            </div>
         </div>
       </CardHeader>
       <CardContent className="px-6 pb-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <div>
-              <p className="font-bold text-lg text-primary">Major</p>
-              <p className="text-muted-foreground">{user.major}</p>
-            </div>
-            <div>
-              <p className="font-bold text-lg text-primary">Term</p>
-              <p className="text-muted-foreground">{user.currentTerm}</p>
-            </div>
-            <div>
-              <p className="font-bold text-lg text-primary">GPA</p>
-              <p className="text-muted-foreground">{user.gpa.toFixed(2)}</p>
-            </div>
-          </div>
           <div className="space-y-2">
             <div className="flex justify-between items-center text-sm">
                 <p className="font-medium text-muted-foreground">Degree Progress</p>
