@@ -18,17 +18,17 @@ export default function DashboardPage() {
               <div className="flex items-center gap-3">
                 <ListChecks className="h-6 w-6 text-primary" />
                 <CardTitle>Completed Courses</CardTitle>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Info className="h-4 w-4 text-muted-foreground cursor-pointer" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Courses you have successfully passed.</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Info className="h-4 w-4 text-muted-foreground cursor-pointer" />
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Courses you have successfully passed.</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
             </div>
           </CardHeader>
           <CardContent>
@@ -73,17 +73,17 @@ export default function DashboardPage() {
                 <div className="flex items-center gap-3">
                   <BookOpen className="h-6 w-6 text-primary" />
                   <CardTitle>Pending Courses</CardTitle>
+                  <TooltipProvider>
+                      <Tooltip>
+                          <TooltipTrigger asChild>
+                              <Info className="h-4 w-4 text-muted-foreground cursor-pointer" />
+                          </TooltipTrigger>
+                          <TooltipContent>
+                              <p>Required courses for your degree.</p>
+                          </TooltipContent>
+                      </Tooltip>
+                  </TooltipProvider>
                 </div>
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Info className="h-4 w-4 text-muted-foreground cursor-pointer" />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>Required courses for your degree.</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
             </div>
           </CardHeader>
           <CardContent>
