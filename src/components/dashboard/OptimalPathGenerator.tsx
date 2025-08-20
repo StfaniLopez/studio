@@ -80,19 +80,8 @@ export default function OptimalPathGenerator() {
     <div className="grid gap-6 lg:grid-cols-3">
       <Card className="lg:col-span-1">
         <CardHeader>
-          <div className="flex items-center gap-3">
-            <CardTitle>Generate Optimal Path</CardTitle>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Info className="h-4 w-4 text-muted-foreground cursor-pointer" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Let AI craft the most efficient path to your graduation. Fill in your details below.</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </div>
+          <CardTitle>Generate Optimal Path</CardTitle>
+          <CardDescription>Let AI craft the most efficient path to your graduation. Fill in your details below.</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
