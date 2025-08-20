@@ -253,14 +253,11 @@ export default function OptimalPathGenerator() {
                 <h3 className="flex items-center gap-2 font-semibold text-lg mb-4"><Lightbulb className="h-5 w-5" />Elective Recommendations</h3>
                  <p className="text-sm text-muted-foreground mb-4">Based on your profile, here are some electives you might enjoy:</p>
                  <div className="space-y-4">
-                  {result.electiveRecommendations.map((electiveCode, index) => {
-                    const courseName = courseMap.get(electiveCode);
-                    return (
-                      <div key={index} className="p-4 rounded-lg border bg-card hover:bg-secondary/80 transition-colors">
-                        <p className="font-medium text-primary">{courseName ? `${courseName} (${electiveCode})` : electiveCode}</p>
-                      </div>
-                    );
-                  })}
+                  {result.electiveRecommendations.map((elective, index) => (
+                    <div key={index} className="p-4 rounded-lg border bg-card hover:bg-secondary/80 transition-colors">
+                      <p className="font-medium text-primary">{elective.name} ({elective.code})</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </CardContent>
