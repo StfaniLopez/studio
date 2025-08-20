@@ -34,6 +34,10 @@ const timelineOptions = [
     "Fall 2027"
 ];
 
+// Create a map for easy course lookup
+const allCourses = [...completedCourses, ...pendingCourses];
+const courseMap = new Map(allCourses.map(course => [course.code, course.name]));
+
 export default function OptimalPathGenerator() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<GenerateOptimalGraduationPathsOutput | null>(null);
@@ -232,26 +236,32 @@ export default function OptimalPathGenerator() {
               <div>
                 <h3 className="flex items-center gap-2 font-semibold text-lg mb-4"><BookOpen className="h-5 w-5" />Optimal Graduation Path</h3>
                 <div className="space-y-4">
-                  {result.optimalPath.map((courseCode, index) => (
+                  {result.optimalPath.map((courseCode, index) => {
+                    const courseName = courseMap.get(courseCode);
+                    return (
                      <div key={index} className="flex items-start rounded-lg bg-secondary p-4">
                        <span className="font-mono text-sm bg-primary/10 text-primary font-semibold rounded-md px-2.5 py-1 mr-4">{index + 1}</span>
                        <div className="flex-1">
-                        <p className="font-medium">{courseCode}</p>
+                        <p className="font-medium">{courseName ? `${courseName} (${courseCode})` : courseCode}</p>
                        </div>
                      </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
               <Separator />
               <div>
                 <h3 className="flex items-center gap-2 font-semibold text-lg mb-4"><Lightbulb className="h-5 w-5" />Elective Recommendations</h3>
                  <p className="text-sm text-muted-foreground mb-4">Based on your profile, here are some electives you might enjoy:</p>
- <div className="space-y-4">
-                  {result.electiveRecommendations.map((electiveCode, index) => (
-                    <div key={index} className="p-4 rounded-lg border bg-card hover:bg-secondary/80 transition-colors">
-                      <p className="font-medium text-primary">{electiveCode}</p>
-                    </div>
-                  ))}
+                 <div className="space-y-4">
+                  {result.electiveRecommendations.map((electiveCode, index) => {
+                    const courseName = courseMap.get(electiveCode);
+                    return (
+                      <div key={index} className="p-4 rounded-lg border bg-card hover:bg-secondary/80 transition-colors">
+                        <p className="font-medium text-primary">{courseName ? `${courseName} (${electiveCode})` : electiveCode}</p>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </CardContent>
