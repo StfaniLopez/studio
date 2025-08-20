@@ -77,7 +77,7 @@ export default function ElectiveRecommender() {
                     </div>
                     <div className="px-6 pt-4">
                       <FormControl>
-                        <Textarea placeholder="e.g., Courses taken, grades, strengths..." className="resize-none bg-card" {...field} rows={4} />
+                        <Textarea placeholder="e.g., Courses taken, grades, strengths..." className="resize-none bg-card text-xs text-muted-foreground" {...field} rows={4} />
                       </FormControl>
                     </div>
                     <FormMessage />
@@ -95,7 +95,7 @@ export default function ElectiveRecommender() {
                     </div>
                     <div className="px-6 pt-4">
                       <FormControl>
-                        <Textarea placeholder="e.g., Hackathons, painting, chess..." className="resize-none bg-card" {...field} rows={4} />
+                        <Textarea placeholder="e.g., Hackathons, painting, chess..." className="resize-none bg-card text-xs text-muted-foreground" {...field} rows={4} />
                       </FormControl>
                     </div>
                     <FormMessage />
@@ -113,7 +113,7 @@ export default function ElectiveRecommender() {
                     </div>
                     <div className="px-6 pt-4">
                       <FormControl>
-                        <Textarea placeholder="e.g., Software Engineer, UX Designer..." className="resize-none bg-card" {...field} rows={4} />
+                        <Textarea placeholder="e.g., Software Engineer, UX Designer..." className="resize-none bg-card text-xs text-muted-foreground" {...field} rows={4} />
                       </FormControl>
                     </div>
                     <FormMessage />

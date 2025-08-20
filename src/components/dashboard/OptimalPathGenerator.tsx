@@ -91,25 +91,25 @@ export default function OptimalPathGenerator() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <div className="bg-muted -mx-6 px-6 py-3">
-                <Accordion type="single" collapsible className="w-full">
-                  <AccordionItem value="item-1" className="border-b-0">
+              <Accordion type="single" collapsible className="w-full">
+                <AccordionItem value="item-1" className="border-b-0">
+                  <div className="bg-muted -mx-6 px-6 py-3">
                     <AccordionTrigger className="hover:no-underline p-0 font-semibold text-foreground text-base">
                       Completed Courses
                     </AccordionTrigger>
-                    <AccordionContent className="bg-card -mx-6 px-6 pt-4 rounded-none font-normal">
-                      <div className="space-y-2 pt-2">
-                        {completedCourses.map(course => (
-                            <div key={course.code} className="flex items-center gap-2">
-                                <CheckCircle className="h-4 w-4 text-green-500" />
-                                <span className="text-sm text-muted-foreground">{course.name} ({course.code})</span>
-                            </div>
-                        ))}
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </div>
+                  </div>
+                  <AccordionContent className="bg-card -mx-6 px-6 pt-4 rounded-none font-normal">
+                    <div className="space-y-2 pt-2">
+                      {completedCourses.map(course => (
+                          <div key={course.code} className="flex items-center gap-2">
+                              <CheckCircle className="h-4 w-4 text-green-500" />
+                              <span className="text-sm text-muted-foreground">{course.name} ({course.code})</span>
+                          </div>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
               
               <FormField
                 control={form.control}
@@ -208,7 +208,7 @@ export default function OptimalPathGenerator() {
                     </div>
                     <div className="pt-4 px-6">
                       <FormControl>
-                        <Textarea placeholder="Tell us about your interests, strengths, etc." className="resize-none" {...field} />
+                        <Textarea placeholder="Tell us about your interests, strengths, etc." className="resize-none text-xs text-muted-foreground" {...field} />
                       </FormControl>
                       <FormDescription>
                           Provide a brief summary of your academic interests, strengths, or career goals to get better elective recommendations.
