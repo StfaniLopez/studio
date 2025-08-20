@@ -18,10 +18,11 @@ export default function Header() {
     .join('');
 
   return (
-    <header className="sticky top-0 flex h-20 items-center gap-4 border-b px-4 md:px-6 z-50" style={{ backgroundColor: '#e8e4ff' }}>
-      <GraduationCap className="h-10 w-10 text-purple-700" /> {/* Adjusted icon color */}
-      <h1 className="text-2xl font-semibold md:text-3xl font-headline" style={{ color: '#4a0e4e' }}> {/* Adjusted text color */}
- GradPath-AI Planner
+    <header className="sticky top-0 flex h-20 items-center gap-4 border-b px-4 md:px-6 z-50 bg-white text-black">
+      <GraduationCap className="h-10 w-10 text-primary" /> {/* Adjusted icon color */}
+      <h1 className="text-2xl font-semibold md:text-3xl font-headline text-primary">
+        <span className="text-black">GradPath - </span>
+        <span className="text-primary">LEAD University</span>
  </h1>
 
  {/* User Dropdown - Aligned to the right */}
@@ -30,8 +31,8 @@ export default function Header() {
  <DropdownMenu>
  <DropdownMenuTrigger asChild>
  <Button variant="secondary" size="icon" className="rounded-full">
- <Avatar>
- <AvatarFallback>{userInitials}</AvatarFallback>
+ <Avatar className="h-10 w-10">
+ <AvatarFallback className="text-primary">{userInitials}</AvatarFallback>
  </Avatar>
  <span className="sr-only">Toggle user menu</span>
  </Button>
@@ -39,11 +40,11 @@ export default function Header() {
  <DropdownMenuContent align="end">
  <DropdownMenuLabel>My Account</DropdownMenuLabel>
  <DropdownMenuSeparator />
- <DropdownMenuItem className="text-gray-700 hover:bg-purple-100 cursor-pointer"> {/* Added hover style and cursor */}
- <User className="mr-2 h-4 w-4 text-gray-600" /> {/* Adjusted icon color */}
+ <DropdownMenuItem className="text-black hover:bg-accent cursor-pointer"> {/* Added hover style and cursor */}
+ <User className="mr-2 h-4 w-4" /> {/* Adjusted icon color */}
  <span>Profile</span>
  </DropdownMenuItem>
- <DropdownMenuItem className="text-gray-700 hover:bg-purple-100 cursor-pointer"> {/* Added hover style and cursor */}
+ <DropdownMenuItem className="text-black hover:bg-accent cursor-pointer"> {/* Added hover style and cursor */}
  <Settings className="mr-2 h-4 w-4 text-gray-600" /> {/* Adjusted icon color */}
  <span>Settings</span>
  </DropdownMenuItem>

@@ -5,97 +5,52 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { completedCourses, pendingCourses } from "@/lib/data";
 import { BookOpen, ListChecks } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
 
 export default function DashboardPage() {
   const pathname = usePathname();
 
   return (
-    <>
-    <div className="grid gap-6">
+    <div className="grid gap-6 text-black bg-white container mx-auto px-4">
       <div className="grid gap-8 md:grid-cols-2">
-        {/* Navigation options */}
-        <div className="flex justify-center gap-4 mb-6">
-          {/* Dashboard Link */}
-          <Link href="/dashboard">
-            <div className={`flex flex-col items-center px-4 py-2 rounded-md transition-colors duration-200 hover:bg-purple-200 hover:shadow-md cursor-pointer ${
-              pathname === '/dashboard' || pathname === '/'
-                ? 'bg-[#8981df] text-white' // Active state classes
-                : 'text-gray-700'
-            }
-            `}>
-              <ListChecks className="h-5 w-5" /> {/* Placeholder icon, replace with actual icon if needed */}
-              <span className="text-sm font-medium">Dashboard</span>
-            </div>
-          </Link>
-          {/* Optimal Path Link */}
-          <Link href="/optimal-path">
-            <div className={`flex flex-col items-center px-4 py-2 rounded-md transition-colors duration-200 hover:bg-purple-200 hover:shadow-md cursor-pointer ${
-              pathname === '/optimal-path'
-                ? 'bg-[#8981df] text-white' // Active state classes
-                : 'text-gray-700'
-            }
-            `}>
-              <BookOpen className="h-5 w-5" /> {/* Placeholder icon */}
-              <span className="text-sm font-medium">Optimal Path</span>
-            </div>
-          </Link>
-          {/* Electives Link */}
-          <Link href="/electives">
-            <div className={`flex flex-col items-center px-4 py-2 rounded-md transition-colors duration-200 hover:bg-purple-200 hover:shadow-md cursor-pointer ${
-              pathname === '/electives'
-                ? 'bg-[#8981df] text-white' // Active state classes
-                : 'text-gray-700'
-            }
-            `}>
-              <BookOpen className="h-5 w-5" /> {/* Placeholder icon */}
-              <span className="text-sm font-medium">Electives</span>
-            </div>
-          </Link>
-          {/* Prediction Link */}
-          <Link href="/prediction">
-            <div className={`flex flex-col items-center px-4 py-2 rounded-md transition-colors duration-200 hover:bg-purple-200 hover:shadow-md cursor-pointer ${
-              pathname === '/prediction'
-                ? 'bg-[#8981df] text-white' // Active state classes
-                : 'text-gray-700'
-            }
-            `}>
-              <BookOpen className="h-5 w-5" /> {/* Placeholder icon */}
-              <span className="text-sm font-medium">Prediction</span>
-            </div>
-          </Link>
-        </div>
+        {/* Completed Courses */}
         <Card className="flex flex-col">
           <CardHeader>
             <div className="flex items-center gap-3">
               <ListChecks className="h-6 w-6 text-primary" />
-              <CardTitle className="text-xl font-semibold">Completed Courses</CardTitle>
+              <CardTitle className="text-xl font-semibold text-black">Completed Courses</CardTitle>
             </div>
-            <CardDescription className="text-sm text-muted-foreground mt-1">
+            <CardDescription className="text-sm text-black mt-1">
               Courses you have successfully passed.
             </CardDescription>
           </CardHeader>
-
           <CardContent>
             <Table>
-              <TableHeader className="text-sm text-muted-foreground">
+              <TableHeader>
                 <TableRow>
-                  <TableHead>Course</TableHead>
-                  <TableHead>Credits</TableHead>
-                  <TableHead className="text-right">Grade</TableHead>
+                  <TableHead className="text-black">Course</TableHead>
+                  <TableHead className="text-black">Credits</TableHead>
+                  <TableHead className="text-black text-right">Grade</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {completedCourses.map((course) => (
                   <TableRow key={course.code}>
                     <TableCell>
-                        <div className="font-medium">{course.name}</div>
-                        <div className="text-sm text-muted-foreground">{course.code}</div>
+                      <div className="font-medium text-black">{course.name}</div>
+                      <div className="text-sm text-black">{course.code}</div>
                     </TableCell>
                     <TableCell>{course.credits}</TableCell>
                     <TableCell className="text-right">
-                      <Badge variant="default">{course.grade}</Badge>
+                      <Badge
+                        variant="default"
+                        className={
+                          course.grade === "A"
+                            ? "bg-accent text-white"
+                            : "bg-secondary text-black"
+                        }>
+                        {course.grade}
+                      </Badge>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -103,42 +58,56 @@ export default function DashboardPage() {
             </Table>
           </CardContent>
         </Card>
+
+        {/* Pending Courses */}
         <Card className="flex flex-col">
           <CardHeader>
-             <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3">
               <BookOpen className="h-6 w-6 text-primary" />
-              <CardTitle className="text-xl font-semibold">Pending Courses</CardTitle>
+              <CardTitle className="text-xl font-semibold text-black">Pending Courses</CardTitle>
             </div>
-            <CardDescription className="text-sm text-muted-foreground mt-1">
+            <CardDescription className="text-sm text-black mt-1">
               Required courses for your degree.
             </CardDescription>
           </CardHeader>
           <CardContent>
-             <Table >
+            <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Course</TableHead>
-                  <TableHead>Credits</TableHead>
-                  <TableHead>Prerequisites</TableHead>
+                  <TableHead className="text-black">Course</TableHead>
+                  <TableHead className="text-black">Credits</TableHead>
+                  <TableHead className="text-black">Status</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {pendingCourses.map((course) => (
-                  <TableRow key={course.code}>
-                    <TableCell className="font-medium">
-                      <div>{course.name}</div>
-                      <div className="text-sm text-muted-foreground mt-1">{course.code}</div>
-                    </TableCell>
-                    <TableCell>{course.credits}</TableCell>
-                    <TableCell>{course.prerequisites.join(', ') || 'None'}</TableCell>
-                  </TableRow>
-                ))}
+                {pendingCourses.map((course) => {
+                  const isInProgress = course.code === "TTCT0022"; // Visualización de datos
+                  return (
+                    <TableRow key={course.code}>
+                      <TableCell>
+                        <div className="font-medium text-black">{course.name}</div>
+                        <div className="text-sm text-black">{course.code}</div>
+                      </TableCell>
+                      <TableCell>{course.credits}</TableCell>
+                      <TableCell>
+                        {isInProgress ? (
+                          <Badge variant="default" className="bg-accent text-white">
+                            In Progress
+                          </Badge>
+                        ) : (
+                          <Badge variant="default" className="bg-secondary text-black">
+                            Pending
+                          </Badge>
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </Table>
           </CardContent>
         </Card>
       </div>
     </div>
-    </>
-  )
+  );
 }
