@@ -35,7 +35,7 @@ const timelineOptions = [
 ];
 
 // Create a map for easy course lookup
-const courseMap = new Map(allCourseData.map(course => [course.code, course.name]));
+const courseMap = new Map(allCoursesData.map(course => [course.code, course.name]));
 
 export default function OptimalPathGenerator() {
   const [loading, setLoading] = useState(false);
@@ -91,10 +91,10 @@ export default function OptimalPathGenerator() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <div className="bg-muted -mx-6 px-6 py-3 font-semibold text-foreground">
+              <div className="bg-muted -mx-6 px-6 py-3">
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="item-1" className="border-b-0">
-                    <AccordionTrigger className="hover:no-underline p-0">
+                    <AccordionTrigger className="hover:no-underline p-0 font-semibold text-sm text-foreground">
                       Completed Courses
                     </AccordionTrigger>
                     <AccordionContent className="bg-card p-4 rounded-md mt-2 font-normal">
@@ -131,7 +131,7 @@ export default function OptimalPathGenerator() {
                           </TooltipProvider>
                         </div>
                     </div>
-                    <div className="space-y-4 pt-4">
+                    <div className="space-y-4 pt-4 px-6">
                         {pendingCourses.map((course) => (
                         <FormField
                             key={course.code}
@@ -166,7 +166,7 @@ export default function OptimalPathGenerator() {
                         />
                         ))}
                     </div>
-                    <FormMessage />
+                    <FormMessage className="px-6" />
                   </FormItem>
                 )}
               />
@@ -179,7 +179,7 @@ export default function OptimalPathGenerator() {
                     <div className="bg-muted -mx-6 px-6 py-3 font-semibold text-foreground">
                       <FormLabel>Desired Graduation Timeline</FormLabel>
                     </div>
-                    <div className="pt-4">
+                    <div className="pt-4 px-6">
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                               <SelectTrigger>
@@ -193,7 +193,7 @@ export default function OptimalPathGenerator() {
                           </SelectContent>
                       </Select>
                     </div>
-                    <FormMessage />
+                    <FormMessage className="px-6" />
                   </FormItem>
                 )}
               />
@@ -206,7 +206,7 @@ export default function OptimalPathGenerator() {
                     <div className="bg-muted -mx-6 px-6 py-3 font-semibold text-foreground">
                       <FormLabel>Student Profile (Optional)</FormLabel>
                     </div>
-                    <div className="pt-4">
+                    <div className="pt-4 px-6">
                       <FormControl>
                         <Textarea placeholder="Tell us about your interests, strengths, etc." className="resize-none" {...field} />
                       </FormControl>
@@ -214,12 +214,12 @@ export default function OptimalPathGenerator() {
                           Provide a brief summary of your academic interests, strengths, or career goals to get better elective recommendations.
                       </FormDescription>
                     </div>
-                    <FormMessage />
+                    <FormMessage className="px-6" />
                   </FormItem>
                 )}
               />
 
-              <div className="pt-4">
+              <div className="pt-4 px-6 pb-6">
                 <Button type="submit" disabled={loading} className="w-full">
                   {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />}
                   Generate Path
