@@ -35,7 +35,7 @@ const timelineOptions = [
 ];
 
 // Create a map for easy course lookup
-const courseMap = new Map(allCoursesData.map(course => [course.code, course.name]));
+const courseMap = new Map(allCourseData.map(course => [course.code, course.name]));
 
 export default function OptimalPathGenerator() {
   const [loading, setLoading] = useState(false);
@@ -94,7 +94,7 @@ export default function OptimalPathGenerator() {
               <div className="bg-muted -mx-6 px-6 py-3">
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="item-1" className="border-b-0">
-                    <AccordionTrigger className="hover:no-underline p-0 font-semibold text-sm text-foreground">
+                    <AccordionTrigger className="hover:no-underline p-0 font-semibold text-foreground text-sm">
                       Completed Courses
                     </AccordionTrigger>
                     <AccordionContent className="bg-card p-4 rounded-md mt-2 font-normal">
